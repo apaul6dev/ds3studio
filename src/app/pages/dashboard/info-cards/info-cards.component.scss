@@ -1,0 +1,13 @@
+.mat-mdc-chip.info-chip{ 
+    font-size: 12px;
+    font-weight: 400;
+    .mat-mdc-chip-graphic {
+        width: 0;
+        .mdc-evolution-chip__checkmark {
+            opacity: 0;
+        }
+    }
+    .mat-icon{
+        margin-right: 4px;
+    }
+}

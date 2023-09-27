@@ -1,0 +1,16 @@
+<div class="p-2">
+    <mat-card>
+        <mat-card-header>                
+            <mat-card-title>Dialog Overview</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="pt-3">
+            <mat-form-field>
+                <input matInput [(ngModel)]="name" placeholder="What's your name?">
+            </mat-form-field>
+            <p>
+                <button mat-raised-button (click)="openDialog()">Pick one</button>
+            </p>
+            <p *ngIf="animal" class="py-1">You chose: <i>{{animal}}</i></p>
+        </mat-card-content>
+    </mat-card>
+</div> 
