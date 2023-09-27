@@ -4,7 +4,7 @@ import { Settings } from './app.settings.model';
 @Injectable()
 export class AppSettings {
     public settings = new Settings(
-        'Gradus',       //theme name
+        'DS3',       //theme name
         true,           //loadingSpinner
         true,           //fixedHeader
         true,           //sidenavIsOpened
