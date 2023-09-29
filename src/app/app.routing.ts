@@ -11,6 +11,7 @@ export const routes: Routes = [
     { 
         path: '', 
         component: PagesComponent, children: [
+            /*
             { path: '', loadChildren: () => import('./pages/template/dashboard/dashboard.module').then(m => m.DashboardModule), data: { breadcrumb: 'Dashboard' } },
             { path: 'users', loadChildren: () => import('./pages/template/users/users.module').then(m => m.UsersModule), data: { breadcrumb: 'Users' } },
             { path: 'ui', loadChildren: () => import('./pages/template/ui/ui.module').then(m => m.UiModule), data: { breadcrumb: 'UI' } },
@@ -26,7 +27,14 @@ export const routes: Routes = [
             { path: 'dynamic-menu', loadChildren: () => import('./pages/template/dynamic-menu/dynamic-menu.module').then(m => m.DynamicMenuModule), data: { breadcrumb: 'Dynamic Menu' }  },          
             { path: 'profile', loadChildren: () => import ('./pages/template/profile/profile.module').then(m => m.ProfileModule), data: { breadcrumb: 'Profile' } }, 
             { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } },
-            { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } }
+            { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },
+            */
+            { path: '', loadChildren: () => import('./pages/system/inicio/inicio.module').then(m => m.InicioModule), data: { breadcrumb: 'Inicio' } },
+            { path: 'dispositivos', loadChildren: () => import('./pages/system/dispositivos/dispositivos.module').then(m => m.DispositivosModule), data: { breadcrumb: 'Dispositivos' } },
+            { path: 'notificaciones', loadChildren: () => import('./pages/system/notificaciones/notificaciones.module').then(m => m.NotificacionesModule), data: { breadcrumb: 'Notificaciones' } },
+            { path: 'mensajes', loadChildren: () => import('./pages/system/mensajes/mensajes.module').then(m => m.MensajesModule), data: { breadcrumb: 'Mensajes' } },
+            { path: 'comunidad', loadChildren: () => import('./pages/system/comunidad/comunidad.module').then(m => m.ComunidadModule), data: { breadcrumb: 'Comunidad' } },
+
         ]
     },
     { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },

@@ -1,6 +1,13 @@
 import { Menu } from './menu.model';
 
 export const verticalMenuItems = [ 
+    new Menu (300, 'Inicio', '/', null, 'home', null, false, 0), 
+    new Menu (301, 'Dispositivos', '/dispositivos', null, 'devices', null, false, 0), 
+    new Menu (302, 'Notificaciones', '/notificaciones', null, 'notifications', null, false, 0), 
+    new Menu (303, 'Mensajes', '/mensajes', null, 'textsms', null, false, 0), 
+    new Menu (304, 'Comunidad', '/comunidad', null, 'people', null, false, 0), 
+
+    /*
     new Menu (1, 'Dashboard', '/', null, 'dashboard', null, false, 0),
     new Menu (2, 'Users', '/users', null, 'supervisor_account', null, false, 0), 
     new Menu (3, 'UI Features', null, null, 'computer', null, true, 0),   
@@ -61,10 +68,16 @@ export const verticalMenuItems = [
     new Menu (142, 'Level 3', null, null, 'folder_open', null, true, 141),
     new Menu (143, 'Level 4', null, null, 'folder_open', null, true, 142),
     new Menu (144, 'Level 5', null, 'http://themeseason.com', 'link', null, false, 143),
-    new Menu (200, 'External Link', null, 'http://themeseason.com', 'open_in_new', '_blank', false, 0)
+    new Menu (200, 'External Link', null, 'http://themeseason.com', 'open_in_new', '_blank', false, 0),*/
 ]
 
 export const horizontalMenuItems = [ 
+    new Menu (300, 'Inicio', '/', null, 'home', null, false, 0), 
+    new Menu (301, 'Dispositivos', '/dispositivos', null, 'devices', null, false, 0), 
+    new Menu (302, 'Notificaciones', '/notificaciones', null, 'notifications', null, false, 0), 
+    new Menu (303, 'Mensajes', '/mensajes', null, 'textsms', null, false, 0), 
+    new Menu (304, 'Comunidad', '/comunidad', null, 'people', null, false, 0), 
+    /*
     new Menu (1, 'Dashboard', '/', null, 'dashboard', null, false, 0),
     new Menu (2, 'Users', '/users', null, 'supervisor_account', null, false, 0), 
     new Menu (3, 'UI Features', null, null, 'computer', null, true, 0),   
@@ -119,5 +132,5 @@ export const horizontalMenuItems = [
     new Menu (50, 'Projects', '/profile/projects', null, 'note', null, false, 49),    
     new Menu (51, 'User Info', '/profile/user-info', null, 'perm_contact_calendar', null, false, 49),
     new Menu (55, 'Schedule', '/schedule', null, 'event', null, false, 40),
-    new Menu (200, 'External Link', null, 'http://themeseason.com', 'open_in_new', '_blank', false, 40)
+    new Menu (200, 'External Link', null, 'http://themeseason.com', 'open_in_new', '_blank', false, 40), */
 ]
