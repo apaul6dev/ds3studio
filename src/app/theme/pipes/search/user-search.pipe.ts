@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { User } from 'src/app/pages/users/user.model';
+import { User } from 'src/app/pages/template/users/user.model';
 
 @Pipe({ name: 'UserSearchPipe', pure: false })
 export class UserSearchPipe implements PipeTransform {

@@ -16,8 +16,8 @@ import { AppRoutingModule } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { PagesComponent } from './pages/pages.component';
-import { BlankComponent } from './pages/blank/blank.component';
-import { SearchComponent } from './pages/search/search.component';
+import { BlankComponent } from './pages/template/blank/blank.component';
+import { SearchComponent } from './pages/template/search/search.component';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { ErrorComponent } from './pages/errors/error/error.component';
 import { AppSettings } from './app.settings';
