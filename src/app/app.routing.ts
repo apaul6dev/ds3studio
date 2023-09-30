@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules  } from '@angular/router'; 
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import { PagesComponent } from './pages/pages.component';
 import { BlankComponent } from './pages/template/blank/blank.component';
@@ -8,8 +8,8 @@ import { NotFoundComponent } from './pages/errors/not-found/not-found.component'
 import { ErrorComponent } from './pages/errors/error/error.component';
 
 export const routes: Routes = [
-    { 
-        path: '', 
+    {
+        path: '',
         component: PagesComponent, children: [
             /*
             { path: '', loadChildren: () => import('./pages/template/dashboard/dashboard.module').then(m => m.DashboardModule), data: { breadcrumb: 'Dashboard' } },
@@ -41,13 +41,13 @@ export const routes: Routes = [
     { path: 'register', loadChildren: () => import('./pages/template/register/register.module').then(m => m.RegisterModule) },
     { path: 'error', component: ErrorComponent, data: { breadcrumb: 'Error' } },
     { path: '**', component: NotFoundComponent }
-]; 
+];
 
 @NgModule({
     imports: [
         RouterModule.forRoot(routes, {
-    preloadingStrategy: PreloadAllModules
-})
+            preloadingStrategy: PreloadAllModules
+        })
     ],
     exports: [
         RouterModule
