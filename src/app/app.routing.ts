@@ -37,6 +37,7 @@ export const routes: Routes = [
 
         ]
     },
+    
     { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
     { path: 'register', loadChildren: () => import('./pages/template/register/register.module').then(m => m.RegisterModule) },
     { path: 'error', component: ErrorComponent, data: { breadcrumb: 'Error' } },

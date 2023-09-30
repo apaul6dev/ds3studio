@@ -1,12 +1,13 @@
 export const environment = {
+  production: false,
   firebase: {
-    projectId: 'mesero-app3-4c409',
-    appId: '1:10705063866:web:128b4012ab6140ab',
-    databaseURL: 'https://mesero-app3-4c409.firebaseio.com',
-    storageBucket: 'mesero-app3-4c409.appspot.com',
+    projectId: "modosmart-2506c",
+    appId: "1:32762457249:web:cb74f2e2f2288b2550d4e0",
+    measurementId: "G-YR6S22B07E",
+    storageBucket: "modosmart-2506c.appspot.com",
     locationId: 'us-central',
-    apiKey: 'AIzaSyDMP0YOSJb3FR3REYMz1vwwfuqrQERk9Fs',
-    authDomain: 'mesero-app3-4c409.firebaseapp.com',
-    messagingSenderId: '10705063866',
+    apiKey: "AIzaSyBB5xCP7i0x4NOm1bA2Sk-qpQjeMl57sAc",
+    authDomain: "modosmart-2506c.firebaseapp.com",
+    messagingSenderId: "32762457249",
   },
 };

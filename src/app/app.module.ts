@@ -1,14 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
- 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { CustomOverlayContainer } from './theme/utils/custom-overlay-container';
- 
+
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns'; 
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { SharedModule } from './shared/shared.module';
 import { PipesModule } from './theme/pipes/pipes.module';
@@ -32,16 +32,16 @@ import { ApplicationsComponent } from './theme/components/applications/applicati
 import { MessagesComponent } from './theme/components/messages/messages.component';
 import { UserMenuComponent } from './theme/components/user-menu/user-menu.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 
 @NgModule({
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,     
-    FormsModule, 
-    ReactiveFormsModule, 
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgScrollbarModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -76,7 +76,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     MessagesComponent,
     UserMenuComponent
   ],
-  providers: [ 
+  providers: [
     AppSettings,
     { provide: OverlayContainer, useClass: CustomOverlayContainer }
   ],
