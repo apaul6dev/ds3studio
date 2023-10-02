@@ -32,7 +32,7 @@ export const routes: Routes = [
             { path: '', loadChildren: () => import('./pages/system/inicio/inicio.module').then(m => m.InicioModule), data: { breadcrumb: 'Inicio' } },
             { path: 'dispositivos', loadChildren: () => import('./pages/system/dispositivos/dispositivos.module').then(m => m.DispositivosModule), data: { breadcrumb: 'Dispositivos' } },
             { path: 'notificaciones', loadChildren: () => import('./pages/system/notificaciones/notificaciones.module').then(m => m.NotificacionesModule), data: { breadcrumb: 'Notificaciones' } },
-            { path: 'mensajes', loadChildren: () => import('./pages/system/mensajes/mensajes.module').then(m => m.MensajesModule), data: { breadcrumb: 'Mensajes' } },
+            { path: 'chat', loadChildren: () => import('./pages/system/chat/chat.module').then(m => m.ChatModule), data: { breadcrumb: 'Mensajes' } },
             { path: 'comunidad', loadChildren: () => import('./pages/system/comunidad/comunidad.module').then(m => m.ComunidadModule), data: { breadcrumb: 'Comunidad' } },
 
         ]

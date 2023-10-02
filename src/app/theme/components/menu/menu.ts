@@ -4,7 +4,7 @@ export const verticalMenuItems = [
     new Menu (300, 'Inicio', '/', null, 'home', null, false, 0), 
     new Menu (301, 'Dispositivos', '/dispositivos', null, 'devices', null, false, 0), 
     new Menu (302, 'Notificaciones', '/notificaciones', null, 'notifications', null, false, 0), 
-    new Menu (303, 'Mensajes', '/mensajes', null, 'textsms', null, false, 0), 
+    new Menu (303, 'Mensajes', '/chat', null, 'textsms', null, false, 0), 
     new Menu (304, 'Comunidad', '/comunidad', null, 'people', null, false, 0), 
 
     /*
@@ -75,7 +75,7 @@ export const horizontalMenuItems = [
     new Menu (300, 'Inicio', '/', null, 'home', null, false, 0), 
     new Menu (301, 'Dispositivos', '/dispositivos', null, 'devices', null, false, 0), 
     new Menu (302, 'Notificaciones', '/notificaciones', null, 'notifications', null, false, 0), 
-    new Menu (303, 'Mensajes', '/mensajes', null, 'textsms', null, false, 0), 
+    new Menu (303, 'Mensajes', '/chat', null, 'textsms', null, false, 0), 
     new Menu (304, 'Comunidad', '/comunidad', null, 'groups', null, false, 0), 
     /*
     new Menu (1, 'Dashboard', '/', null, 'dashboard', null, false, 0),

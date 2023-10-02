@@ -1,32 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MensajesComponent } from './mensajes.component';
+import { ChatComponent } from './chat.component';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { PipesModule } from 'src/app/theme/pipes/pipes.module';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 
 export const routes: Routes = [
-    { path: '', component: MensajesComponent, pathMatch: 'full' }
+    { path: '', component: ChatComponent, pathMatch: 'full' }
   ];
   
   @NgModule({
     imports: [
-        CommonModule,
         HttpClientModule,
+        PipesModule,  
+        CommonModule,
         RouterModule.forChild(routes),
         FormsModule,
-        ReactiveFormsModule,
-        //InMemoryWebApiModule.forRoot(UsersData, { delay: 500 }),
-        NgxPaginationModule,
-        SharedModule,
-        PipesModule    
+        NgScrollbarModule,
+        SharedModule
     ],
     declarations: [
-      MensajesComponent, 
+      ChatComponent, 
     ] 
   })
-  export class MensajesModule { }
+  export class ChatModule { }
