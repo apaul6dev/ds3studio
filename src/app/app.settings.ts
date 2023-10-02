@@ -10,7 +10,7 @@ export class AppSettings {
         true,           //sidenavIsOpened
         true,           //sidenavIsPinned  
         true,           //sidenavUserBlock 
-        'horizontal',     //horizontal , vertical
+        'vertical',     //horizontal , vertical
         'default',      //default, compact, mini
         'blue-dark', //indigo-light, teal-light, red-light, blue-dark, green-dark, pink-dark
         false,          // true = rtl, false = ltr

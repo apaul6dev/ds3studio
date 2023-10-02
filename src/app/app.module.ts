@@ -35,6 +35,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './shared/auth.interceptor';
 
 @NgModule({
   imports: [
@@ -43,6 +45,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     FormsModule,
     ReactiveFormsModule,
     NgScrollbarModule,
+    HttpClientModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
@@ -78,7 +81,15 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
   ],
   providers: [
     AppSettings,
-    { provide: OverlayContainer, useClass: CustomOverlayContainer }
+    {
+      provide: OverlayContainer,
+      useClass: CustomOverlayContainer
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

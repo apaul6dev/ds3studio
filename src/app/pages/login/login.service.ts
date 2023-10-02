@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth'
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth'
+import { TOKEN_NAME } from "src/app/shared/constants";
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +15,18 @@ export class LoginService {
 
     login({ email, password }: any) {
         return signInWithEmailAndPassword(this.auth, email, password);
+    }
+
+    logout() {
+        return signOut(this.auth);
+    }
+
+    isLoggedIn() {
+        return sessionStorage.getItem(TOKEN_NAME) != null;
+    }
+
+    getToken(){
+        return sessionStorage.getItem(TOKEN_NAME);
     }
 
 }

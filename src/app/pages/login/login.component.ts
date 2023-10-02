@@ -5,6 +5,7 @@ import { emailValidator } from '../../theme/utils/app-validators';
 import { AppSettings } from '../../app.settings';
 import { Settings } from '../../app.settings.model';
 import { LoginService } from './login.service';
+import { TOKEN_NAME, UID_NAME } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-login',
@@ -40,6 +41,9 @@ export class LoginComponent {
       this.loginService.login({ email, password })
         .then(response => {
           console.log(response);
+          const loginUsuario: any = response.user;
+          sessionStorage.setItem(TOKEN_NAME, loginUsuario.accessToken!);
+          sessionStorage.setItem(UID_NAME, loginUsuario.uid!);
           this.router.navigate(['/']);
         }
         ).catch(error => console.log(error))
