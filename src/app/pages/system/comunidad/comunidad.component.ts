@@ -28,6 +28,7 @@ export class ComunidadComponent implements OnInit {
       nombres: 'ECU 911',
       apellidos: '',
       celular: '911',
+      telefono: '',
       descripcion: 'Servicio Integrado de Seguridad ECU 911',
       sos: true,
       id: -1,
@@ -37,9 +38,15 @@ export class ComunidadComponent implements OnInit {
 
   getComunidad() {
     this.comunidadService.listar().subscribe(rs => {
-        console.log("comunidades", rs);
-
+      console.log(rs);
+      if (rs.estado && rs.estado === 'OK') {
+        rs.data.forEach((e: Comunidad) => {
+          this.items.push(e);
+        });
+      } else {
+        console.log("no se ha resuleto el origen de los datos");
       }
+    }
     );
   }
 

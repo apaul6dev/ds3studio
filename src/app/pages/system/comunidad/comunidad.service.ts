@@ -11,7 +11,7 @@ export class ComunidadService {
     constructor(private http: HttpClient) { }
 
     listar() {
-        return this.http.post<any[]>(`${this.url}/listarVecinos/`, null);
+        return this.http.post<any>(`${this.url}/listarVecinos/`, null);
     }
 
 }

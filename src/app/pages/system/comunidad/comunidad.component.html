@@ -11,16 +11,14 @@
                         <mat-expansion-panel-header>
                             <mat-icon>account_circle</mat-icon>
                             <mat-panel-description fxLayoutAlign="space-between center">
-                                <mat-panel-title>{{e.nombres}}</mat-panel-title>
+                                <mat-panel-title>{{e.nombres}} {{e.apellidos}}</mat-panel-title>
                             </mat-panel-description>
                         </mat-expansion-panel-header>
 
-
                         <mat-card-content class="py-3">
-                            <button mat-flat-button color="primary" class="m-1"
-                                (click)="llamar()">{{e.celular}}</button>
-                        <br/>
-                        <br/>
+                            <button mat-flat-button color="primary" class="m-1" (click)="llamar()">{{e.celular}}</button>
+                            <br />
+                            <br />
                             <p>
                                 {{e.descripcion}}
                             </p>
