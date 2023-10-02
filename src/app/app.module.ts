@@ -7,8 +7,8 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { CustomOverlayContainer } from './theme/utils/custom-overlay-container';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+//import { CalendarModule, DateAdapter } from 'angular-calendar';
+//import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { SharedModule } from './shared/shared.module';
 import { PipesModule } from './theme/pipes/pipes.module';
@@ -46,10 +46,10 @@ import { AuthInterceptor } from './shared/auth.interceptor';
     ReactiveFormsModule,
     NgScrollbarModule,
     HttpClientModule,
-    CalendarModule.forRoot({
+    /*CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
-    }),
+    }),*/
     SharedModule,
     PipesModule,
     AppRoutingModule,
