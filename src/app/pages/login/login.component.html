@@ -2,12 +2,12 @@
 
     <div fxLayout="row" fxLayoutAlign="center center" class="h-100">
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" fxFlex="80" fxFlex.gt-sm="30" fxFlex.sm="60"
+        <form [formGroup]="form" (ngSubmit)="onSubmitLogin(form.value)" fxFlex="80" fxFlex.gt-sm="30" fxFlex.sm="60"
             class="mat-elevation-z24">
 
             <mat-card class="p-0 box">
                 <div fxLayout="column" fxLayoutAlign="center center" class="bg-primary box-header">
-                    <button mat-fab color="accent" class="mat-elevation-z12" (click)="onSubmit(form.value);">
+                    <button mat-fab color="accent" class="mat-elevation-z12" (click)="onSubmitLogin(form.value);">
                         <mat-icon>exit_to_app</mat-icon>
                     </button>
                         <a mat-button routerLink="/register">No tienes una cuenta? Registrate ahora!</a>

@@ -5,7 +5,7 @@ import { emailValidator } from '../../theme/utils/app-validators';
 import { AppSettings } from '../../app.settings';
 import { Settings } from '../../app.settings.model';
 import { LoginService } from './login.service';
-import { TOKEN_NAME, UID_NAME } from 'src/app/shared/constants';
+import { TOKEN_NAME } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-login',
@@ -16,13 +16,8 @@ export class LoginComponent {
   public form: UntypedFormGroup;
   public settings: Settings;
 
-  /*
-  usrtest1@d3studio.tk
-  usrtest2@d3studio.tk
-  usrtest3@d3studio.tk
-
-  paul2023
-  */
+  dataUser: any;
+  dataConfigUser: any;
 
   constructor(public appSettings: AppSettings, public fb: UntypedFormBuilder, public router: Router,
     private loginService: LoginService
@@ -34,19 +29,16 @@ export class LoginComponent {
     });
   }
 
-  public onSubmit(values: any): void {
+  public onSubmitLogin(values: any): void {
     if (!this.form.valid) {
       const email = values['email'];
       const password = values['password'];
-      this.loginService.login({ email, password })
-        .then(response => {
-          console.log(response);
-          const loginUsuario: any = response.user;
-          sessionStorage.setItem(TOKEN_NAME, loginUsuario.accessToken!);
-          sessionStorage.setItem(UID_NAME, loginUsuario.uid!);
-          this.router.navigate(['/']);
-        }
-        ).catch(error => console.log(error))
+      this.loginService.login({ email, password }).subscribe(rs => {
+        this.dataUser = rs.data;
+        this.dataConfigUser = rs.config;
+        sessionStorage.setItem(TOKEN_NAME, this.dataUser.token!);
+        this.router.navigate(['/']);
+      });
     }
   }
 
