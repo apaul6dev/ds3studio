@@ -24,7 +24,7 @@ export class LoginComponent {
   ) {
     this.settings = this.appSettings.settings;
     this.form = this.fb.group({
-      'email': ["usrtest1@d3studio.tk", Validators.compose([Validators.required, emailValidator])],
+      'email': ["usrtest2@d3studio.tk", Validators.compose([Validators.required, emailValidator])],
       'password': ["paul2023", Validators.compose([Validators.required, Validators.minLength(6)])]
     });
   }
@@ -34,6 +34,9 @@ export class LoginComponent {
       const email = values['email'];
       const password = values['password'];
       this.loginService.login({ email, password }).subscribe(rs => {
+        
+        console.log(rs);
+        
         this.dataUser = rs.data;
         this.dataConfigUser = rs.config;
         sessionStorage.setItem(TOKEN_NAME, this.dataUser.token!);
