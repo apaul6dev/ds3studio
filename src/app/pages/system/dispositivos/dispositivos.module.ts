@@ -7,6 +7,7 @@ import { DispositivosComponent } from './dispositivos.component';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { PipesModule } from 'src/app/theme/pipes/pipes.module';
+import { CercoComponentc } from './cerco/cerco.component';
 
 
 export const routes: Routes = [
@@ -26,7 +27,7 @@ export const routes: Routes = [
         PipesModule    
     ],
     declarations: [
-      DispositivosComponent, 
+      DispositivosComponent, CercoComponentc
     ] 
   })
   export class DispositivosModule { }

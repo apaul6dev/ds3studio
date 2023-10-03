@@ -1,16 +1,5 @@
 <div class="p-2">
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>
-
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="pt-3">
-            <mat-chip-listbox [multiple]="false">
-                <mat-chip-option *ngFor="let chip of chips" [class.active]="chip.state" (click)="toggleState(chip)">
-                    {{ chip.label }} {{ chip.state ? 'On' : 'Off' }}
-                </mat-chip-option>
-            </mat-chip-listbox>
-        </mat-card-content>
-    </mat-card>
+    <div *ngFor="let item of items">
+        <app-cerco [dispositivo]="item" [coordenadas]="coordenadas" *ngIf="item.ctipodispositivo != 5"></app-cerco>
+    </div>
 </div>
