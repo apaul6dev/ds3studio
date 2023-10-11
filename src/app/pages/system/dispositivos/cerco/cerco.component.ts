@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { DispositivosService } from '../dispositivos.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cerco',
@@ -13,7 +14,10 @@ export class CercoComponentc implements OnInit {
 
   listadeaudios: any = [];
 
-  constructor(private dispositivosService: DispositivosService) { }
+  constructor(private dispositivosService: DispositivosService, public snackBar: MatSnackBar) { 
+    //console.log('inicial cerco: ',this.dispositivo, this.coordenadas);
+    
+  }
 
   ngOnInit(): void {
     if (this.dispositivo.controlaudio) {
@@ -27,8 +31,8 @@ export class CercoComponentc implements OnInit {
       }
     }
     const perifoneoelm = {
-      audioid: 10, iconoff: '../../../assets/iconos/perifoneooff.png',
-      iconon: '../../../assets/iconos/perifoneoon.png',
+      audioid: 10, iconoff: 'assets/iconos/perifoneooff.png',
+      iconon: 'assets/iconos/perifoneoon.png',
       size: 8
     };
     if (this.dispositivo.controlperifoneo) {
@@ -73,7 +77,7 @@ export class CercoComponentc implements OnInit {
     this.dispositivo.longitud = this.coordenadas.longitud;
     this.dispositivosService.smartboxaction(this.dispositivo).subscribe(rs => {
       console.log('smartboxaction ', rs);
-
+      this.openSnackBar(rs.mensaje, rs.estado);
     });
 
     /*
@@ -133,6 +137,12 @@ export class CercoComponentc implements OnInit {
     this.dispositivo.auxiliar = val;
     this.dispositivo.accion = 'auxiliar';
     this.cambiarEstado();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000
+    });
   }
 
 }

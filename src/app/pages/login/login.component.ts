@@ -5,7 +5,7 @@ import { emailValidator } from '../../theme/utils/app-validators';
 import { AppSettings } from '../../app.settings';
 import { Settings } from '../../app.settings.model';
 import { LoginService } from './login.service';
-import { TOKEN_NAME } from 'src/app/shared/constants';
+import { CONFIG_NAME, TOKEN_NAME } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-login',
@@ -34,12 +34,15 @@ export class LoginComponent {
       const email = values['email'];
       const password = values['password'];
       this.loginService.login({ email, password }).subscribe(rs => {
-        
+
         console.log(rs);
         
         this.dataUser = rs.data;
         this.dataConfigUser = rs.config;
-        sessionStorage.setItem(TOKEN_NAME, this.dataUser.token!);
+
+        sessionStorage.setItem(TOKEN_NAME, this.dataUser.token);
+        sessionStorage.setItem(CONFIG_NAME, JSON.stringify(this.dataConfigUser));
+
         this.router.navigate(['/']);
       });
     }

@@ -1,31 +1,31 @@
 
-<mat-grid-list cols="2" rowHeight="1:1">
-  <mat-grid-tile *ngIf="dispositivo.controlcerco">
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile *ngIf="dispositivo.controlcerco!=0">
     <mat-card>
       <mat-card-content>
-        <img class="image-icon" *ngIf="!dispositivo.energizado" src="assets/iconos/appcercoencender.png" alt=""
+        <img class="image-icon" *ngIf="!(dispositivo.energizado!=0)" src="assets/iconos/appcercoencender.png" alt=""
           (click)="encender()" />
-        <img class="image-icon" *ngIf="dispositivo.energizado" src="assets/iconos/appcercoapagar.png" alt=""
+        <img class="image-icon" *ngIf="dispositivo.energizado!=0" src="assets/iconos/appcercoapagar.png" alt=""
           (click)="apagar()" />
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
-  <mat-grid-tile *ngIf="dispositivo.controlpuerta">
+  <mat-grid-tile *ngIf="dispositivo.controlpuerta!=0">
     <mat-card>
       <mat-card-content>
-        <img class="image-icon" *ngIf="!dispositivo.abierto" src="assets/iconos/apppuertaabrir.png" alt=""
+        <img class="image-icon" *ngIf="!(dispositivo.abierto!=0)" src="assets/iconos/apppuertaabrir.png" alt=""
           (click)="abrir()" />
-        <img class="image-icon" *ngIf="dispositivo.abierto" src="assets/iconos/apppuertacerrar.png" alt=""
+        <img class="image-icon" *ngIf="dispositivo.abierto!=0" src="assets/iconos/apppuertacerrar.png" alt=""
           (click)="cerrar()" />
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
-  <mat-grid-tile *ngIf="dispositivo.controlporton">
+  <mat-grid-tile *ngIf="dispositivo.controlporton!=0">
     <mat-card>
       <mat-card-content>
-        <img class="image-icon" *ngIf="!dispositivo.abierto" src="assets/iconos/appportonabrir.png" alt=""
+        <img class="image-icon" *ngIf="!(dispositivo.abierto!=0)" src="assets/iconos/appportonabrir.png" alt=""
           (click)="abrir()" />
-        <img class="image-icon" *ngIf="dispositivo.abierto" src="assets/iconos/appportoncerrar.png" alt=""
+        <img class="image-icon" *ngIf="dispositivo.abierto!=0" src="assets/iconos/appportoncerrar.png" alt=""
           (click)="cerrar()" />
       </mat-card-content>
     </mat-card>
@@ -33,24 +33,24 @@
 </mat-grid-list>
 
 
-<ng-container *ngIf="dispositivo.controlalarma">
-  <mat-grid-list cols="3" rowHeight="1:1">
+<ng-container *ngIf="dispositivo.controlalarma!=0">
+  <mat-grid-list cols="3" rowHeight="2:1">
     <mat-grid-tile>
-      <img class="image-icon" *ngIf="!dispositivo.encendido1" src="assets/iconos/robooff.png" alt=""
+      <img class="image-icon" *ngIf="!(dispositivo.encendido1!=0)" src="assets/iconos/robooff.png" alt=""
         (click)="encender1(1)" />
-      <img class="image-icon" *ngIf="dispositivo.encendido1" src="assets/iconos/roboon.png" alt=""
+      <img class="image-icon" *ngIf="dispositivo.encendido1!=0" src="assets/iconos/roboon.png" alt=""
         (click)="encender1(0)" />
     </mat-grid-tile>
     <mat-grid-tile>
-      <img class="image-icon" *ngIf="!dispositivo.encendido2" src="assets/iconos/fuegooff.png" alt=""
+      <img class="image-icon" *ngIf="!(dispositivo.encendido2!=0)" src="assets/iconos/fuegooff.png" alt=""
         (click)="encender2(1)" />
-      <img class="image-icon" *ngIf="dispositivo.encendido2" src="assets/iconos/fuegoon.png" alt=""
+      <img class="image-icon" *ngIf="dispositivo.encendido2!=0" src="assets/iconos/fuegoon.png" alt=""
         (click)="encender2(0)" />
     </mat-grid-tile>
     <mat-grid-tile>
-      <img class="image-icon" *ngIf="!dispositivo.encendido3" src="assets/iconos/sosoff.png" alt=""
+      <img class="image-icon" *ngIf="!(dispositivo.encendido3!=0)" src="assets/iconos/sosoff.png" alt=""
         (click)="encender3(1)" />
-      <img class="image-icon" *ngIf="dispositivo.encendido3" src="assets/iconos/soson.png" alt=""
+      <img class="image-icon" *ngIf="dispositivo.encendido3!=0" src="assets/iconos/soson.png" alt=""
         (click)="encender3(0)" />
     </mat-grid-tile>
   </mat-grid-list>
@@ -58,7 +58,7 @@
 
 <mat-card>
   <mat-card-content>
-    <mat-grid-list cols="12" rowHeight="1:1" *ngIf="dispositivo.controlaudio || dispositivo.controlperifoneo">
+    <mat-grid-list cols="12" rowHeight="1:1" *ngIf="dispositivo.controlaudio!=0 || dispositivo.controlperifoneo!=0">
       <mat-grid-tile *ngFor="let audioconf of listadeaudios" [colspan]="audioconf.size">
         <img class="image-icon" *ngIf="dispositivo.audio !== audioconf.audioid" [src]="audioconf.iconoff" alt=""
           (click)="audio(audioconf.audioid)" />
@@ -69,9 +69,9 @@
   </mat-card-content>
 </mat-card>
 
-<ng-container *ngIf="dispositivo.controlnombre">
+<ng-container *ngIf="dispositivo.controlnombre==0">
   <ng-container *ngIf="dispositivo.controlnombre > 1">
-    <mat-grid-list cols="12" rowHeight="1:1">
+    <mat-grid-list cols="12" rowHeight="2:1">
       <mat-grid-tile>
         <mat-card>
           <mat-card-content>
@@ -84,7 +84,7 @@
     </mat-grid-list>
   </ng-container>
   <ng-container *ngIf="dispositivo.controlnombre === 1">
-    <mat-grid-list cols="6" rowHeight="1:1">
+    <mat-grid-list cols="6" rowHeight="2:1">
       <mat-grid-tile>
         <mat-card>
           <mat-card-content>
@@ -99,22 +99,23 @@
 </ng-container>
 
 
-<mat-grid-list cols="2" rowHeight="1:1">
-  <mat-grid-tile *ngIf="dispositivo.controlarmar">
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile *ngIf="dispositivo.controlarmar!=0">
     <mat-card>
       <mat-card-content>
-        <img class="image-icon" *ngIf="dispositivo.armado" src="assets/iconos/armadoon.png" alt="" (click)="armar(0)" />
-        <img class="image-icon" *ngIf="!dispositivo.armado" src="assets/iconos/armadooff.png" alt=""
+        <img class="image-icon" *ngIf="dispositivo.armado!=0" src="assets/iconos/armadoon.png" alt="" 
+        (click)="armar(0)" />
+        <img class="image-icon" *ngIf="!(dispositivo.armado!=0)" src="assets/iconos/armadooff.png" alt=""
           (click)="armar(1)" />
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
-  <mat-grid-tile *ngIf="dispositivo.controlauxiliar">
+  <mat-grid-tile *ngIf="dispositivo.controlauxiliar!=0">
     <mat-card>
       <mat-card-content>
-        <img class="image-icon" *ngIf="dispositivo.auxiliar" src="assets/iconos/auxiliaron.png" alt=""
+        <img class="image-icon" *ngIf="dispositivo.auxiliar!=0" src="assets/iconos/auxiliaron.png" alt=""
           (click)="setAuxiliar(0)" />
-        <img class="image-icon" *ngIf="!dispositivo.auxiliar" src="assets/iconos/auxiliaroff.png" alt=""
+        <img class="image-icon" *ngIf="!(dispositivo.auxiliar!=0)" src="assets/iconos/auxiliaroff.png" alt=""
           (click)="setAuxiliar(1)" />
       </mat-card-content>
     </mat-card>
@@ -122,22 +123,22 @@
 </mat-grid-list>
 
 
-<mat-grid-list cols="2" rowHeight="1:1">
-  <mat-grid-tile *ngIf="dispositivo.controlestadoenergia">
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile *ngIf="dispositivo.controlestadoenergia!=0">
     <mat-card>
       <mat-card-content>
-        <img class="image-icon-dispositivo" *ngIf="dispositivo.corriente" src="assets/iconos/corrienteon.png" alt="" />
-        <img class="image-icon-dispositivo" *ngIf="!dispositivo.corriente" src="assets/iconos/corrienteoff.png" alt="" />
+        <img class="image-icon-dispositivo" *ngIf="dispositivo.corriente!=0" src="assets/iconos/corrienteon.png" alt="" />
+        <img class="image-icon-dispositivo" *ngIf="!(dispositivo.corriente!=0)" src="assets/iconos/corrienteoff.png" alt="" />
         <br />
         <mat-label>CORRIENTE</mat-label>
       </mat-card-content>
     </mat-card> 
   </mat-grid-tile>
-  <mat-grid-tile *ngIf="dispositivo.controlestadoenergia">
+  <mat-grid-tile *ngIf="dispositivo.controlestadoenergia!=0">
     <mat-card>
       <mat-card-content>
-        <img class="image-icon-dispositivo" *ngIf="dispositivo.bateria" src="assets/iconos/bateriaon.png" alt="" />
-        <img class="image-icon-dispositivo" *ngIf="!dispositivo.bateria" src="assets/iconos/bateriaoff.png" alt="" />
+        <img class="image-icon-dispositivo" *ngIf="dispositivo.bateria!=0" src="assets/iconos/bateriaon.png" alt="" />
+        <img class="image-icon-dispositivo" *ngIf="!(dispositivo.bateria!=0)" src="assets/iconos/bateriaoff.png" alt="" />
         <br />
         <mat-label>BATERÍA</mat-label>
       </mat-card-content>

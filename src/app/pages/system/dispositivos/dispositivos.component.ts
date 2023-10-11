@@ -3,6 +3,7 @@ import { ThemePalette } from "@angular/material/core";
 import { AppSettings } from "src/app/app.settings";
 import { Settings } from "src/app/app.settings.model";
 import { DispositivosService } from "./dispositivos.service";
+import { GelocationService } from "src/app/shared/geolocation.service";
 
 export interface ChipColor {
   name: string;
@@ -36,31 +37,23 @@ export class DispositivosComponent implements OnInit {
 
   public settings: Settings;
 
-  constructor(public appSettings: AppSettings, private dispositivosService: DispositivosService) {
+  constructor(public appSettings: AppSettings,
+    private dispositivosService: DispositivosService,
+    private gelocationService: GelocationService) {
     this.settings = this.appSettings.settings;
   }
 
   ngOnInit(): void {
     this.obtenerGeolocalizacion();
+    this.obtenerDispositivos();
   }
-
 
   obtenerGeolocalizacion() {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        this.coordenadas.latitud = latitude;
-        this.coordenadas.longitud = longitude;
-        this.obtenerDispositivos();
-        console.log(`Latitud: ${latitude}, Longitud: ${longitude}`);
-      }, (error) => {
-        console.error("Error al obtener la geolocalización:", error);
-      });
-    } else {
-      console.error("Geolocalización no está disponible en este navegador.");
-    }
+    const geo = this.gelocationService.obtenerGeolocalizacion();
+    this.coordenadas.latitud = geo.latitude;
+    this.coordenadas.longitud = geo.longitude;
   }
+
 
   /*
   toggleState(chip: any): void {
@@ -89,5 +82,16 @@ export class DispositivosComponent implements OnInit {
     );
 
   }
+  
+  /*
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopsubmenuComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true,
+    });
+    await popover.present();
+  } */
 
 }
