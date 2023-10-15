@@ -19,7 +19,7 @@ export class InicioService {
         return this.http.post<any>(`${this.url}/controlDispositivos/recuperarEstadoAlarmaComunitaria/`, null);
     }
 
-    smartboxactionalarma(params:any) {
+    smartboxactionalarma(params: any) {
         return this.http.post<any>(`${this.url}/controlDispositivos/smartboxactionalarma/`, params);
     }
 
