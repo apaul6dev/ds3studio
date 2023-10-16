@@ -36,7 +36,7 @@ export class NotificacionesComponent implements OnInit {
 
 
   obtenerDatos(page: number) {
-    this.notifications = [];
+    //this.notifications = [];
     // console.log(this.notifications, this.pagina);
 
     //this.firstload = true;

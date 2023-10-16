@@ -62,12 +62,12 @@ let date = new Date(),
 let chats = [
     new Chat(
         'assets/img/profile/ashley.jpg',
-        'Ashley Ahlberg', 
+        'Comunidad', 
         'Online',
         'Great, then I\'ll definitely buy this theme. Thanks!',
         new Date(year, month, day-2, hour, minute),
         false
-    ),
+    )/*,
     new Chat(
         'assets/img/profile/bruno.jpg',
         'Bruno Vespa',
@@ -107,7 +107,7 @@ let chats = [
         'Great, then I\'ll definitely buy this theme. Thanks!',
         new Date(year, month, day-2, hour, minute),
         false
-    )
+    ) */
 ]
 
 let talks = [
@@ -118,7 +118,7 @@ let talks = [
         'Hi, I\'m looking for admin template with angular material 2 design.  What do you think about Gradus Admin Template?',
         new Date(year, month, day-2, hour, minute+3),
         false
-    ),
+    )/*,
     new Chat(
         'assets/img/users/user.jpg',
         'Emilio Verdines', 
@@ -126,7 +126,7 @@ let talks = [
         'Hi, Gradus is a fully compatible with angular material 2, responsive, organized folder structure, clean & customizable code, easy to use and much more...',
         new Date(year, month, day-2, hour, minute+2),
         true
-    )
+    ) */
 ]
 
 @Injectable()
