@@ -6,16 +6,12 @@ import { HOST } from "src/app/shared/constants";
     providedIn: 'root'
 })
 export class NotificacionesService {
+
     url = `${HOST}`;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {}
 
-
-    /**
-     *Metodo utilizado para obtener datos del servidor independientemente de su categoria
-     *Utilizamos el # de pagina para obtener rangos de resultados
-     */
-    obtenerDatos(params:any) {
+    obtenerDatos(params: any) {
         return this.http.post<any>(`${this.url}/controlDispositivos/listarEventos/`, params);
     }
 

@@ -7,7 +7,7 @@ import { NotificacionesComponent } from './notificaciones.component';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { PipesModule } from 'src/app/theme/pipes/pipes.module';
-
+import { RelativeTimePipe } from './relative-time.pipe';
 
 export const routes: Routes = [
     { path: '', component: NotificacionesComponent, pathMatch: 'full' }
@@ -23,10 +23,10 @@ export const routes: Routes = [
         //InMemoryWebApiModule.forRoot(UsersData, { delay: 500 }),
         NgxPaginationModule,
         SharedModule,
-        PipesModule    
+        PipesModule
     ],
     declarations: [
-      NotificacionesComponent, 
+      NotificacionesComponent, RelativeTimePipe
     ] 
   })
   export class NotificacionesModule { }

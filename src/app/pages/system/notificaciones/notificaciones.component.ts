@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { NotificacionesService } from './notificaciones.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-notificaciones',
@@ -9,38 +10,52 @@ import { NotificacionesService } from './notificaciones.service';
 export class NotificacionesComponent implements OnInit {
 
   pagina = 1;
-  items: any[] = [];
+  notifications: any[] = [];
 
-  fakeUsers: Array<any> = new Array(5);
-
-  constructor(private notificacionesService: NotificacionesService) { }
-
-  ngOnInit(): void {
-    this.obtenerDatos();
-
-
+  constructor(private router: Router, private notificacionesService: NotificacionesService) {
   }
 
-  obtenerDatos() {
+  ngOnInit(): void {
+    this.obtenerDatos(this.pagina);
+  }
+
+  loadMoreNotifications() {
+    this.pagina += 1;
+    this.obtenerDatos(this.pagina);
+  }
+
+  goToNotificationDetail(notificacion: any) {
+    console.log("ver notificacion", notificacion);
+
+    //this.router.navigate(['/detalle', id]);
+  }
+
+
+  obtenerDatos(page: number) {
+    this.notifications = [];
+    // console.log(this.notifications, this.pagina);
 
     //this.firstload = true;
     const solicitud: any = {};
-    solicitud.pagina = this.pagina;
+    solicitud.pagina = page;
 
     this.notificacionesService.obtenerDatos(solicitud).subscribe(resp => {
-      console.log(resp);
 
       if (resp.lista) {
-        resp.lista.forEach((element: { iconoalerta: string; }) => {
+        resp.lista.forEach((element: { iconoalerta: string }, index: number) => {
+          // setTimeout(() => {
           if (element.iconoalerta && element.iconoalerta == 'hand') {
             element.iconoalerta = 'hand-left';
           }
           this.addElementToList(element);
+          // }, index * 100); 
         });
+
+      } else {
+        console.log('error al cargar la lista de notificaciones!');
       }
 
-      console.log(this.items);
-
+      console.log(this.notifications);
 
     });
 
@@ -74,7 +89,7 @@ export class NotificacionesComponent implements OnInit {
             });
           }
  
-          console.log(this.items);
+          console.log(this.notifications);
  
           this.pagina += 1;
           const count = resp.lista ? Object.keys(resp.lista).length : 0;
@@ -84,7 +99,7 @@ export class NotificacionesComponent implements OnInit {
             this.hayMasResultados = true;
           }
  
-          this.utilitarios.ordernarLista(this.items, 'id', 'desc');
+          this.utilitarios.ordernarLista(this.notifications, 'id', 'desc');
  
           console.log('force update the screenxxxx');
         });
@@ -105,175 +120,67 @@ export class NotificacionesComponent implements OnInit {
       return;
     }
 
-    if (obj.usuario) {
-      obj.usuario = obj.usuario.toUpperCase();
-    }
-
-
-    if (!obj.titulo) {
-      obj.titulo = obj.dispositivo
-        ? obj.dispositivo.toUpperCase()
-        : 'DISPOSITIVO';
-    }
+    obj.usuario = obj.usuario ? obj.usuario.toUpperCase() : obj.usuario;
+    obj.titulo = obj.titulo ? obj.titulo : obj.dispositivo ? obj.dispositivo.toUpperCase() : 'DISPOSITIVO';
 
     if (obj.mensaje) {
-      console.log("Predefined mensaje");
+      console.log('Predefined mensaje');
     } else if (obj.accion) {
-      const accion = obj.accion;
-      console.log('!!!!!!!!!!!!!!!!!!!!!!!!!' + accion);
-      if (accion == 'tiempoabiertoexcesivo') {
-        obj.mensaje =
-          'TIEMPO EXCESIVO ' + (obj.valor == 1 ? 'DETECTADO' : 'FINALIZADO');
-      }
-      if (accion == 'corriente') {
-        obj.mensaje =
-          'EL DISPOSITIVO  ' +
-          (obj.valor == 1
-            ? ' HA ENTRADO A TRABAJAR CON CORRIENTE'
-            : ' HA DEJADO DE TRABAJAR CON CORRIENTE');
-      }
-      if (accion == 'bateria') {
-        obj.mensaje =
-          'EL DISPOSITIVO  ' +
-          (obj.valor == 1
-            ? ' HA ENTRADO A TRABAJAR CON BATERIA'
-            : ' HA DEJADO DE TRABAJAR CON BATERIA');
-      }
-
-      if (accion == 'encendido') {
-        obj.mensaje =
-          'EL DISPOSITIVO  ' +
-          (obj.valor == 1 ? ' HA SIDO ENCENDIDO' : ' HA SIDO APAGADO');
-
-        if (obj.usuario) {
-          obj.mensaje = obj.mensaje + ' POR ' + obj.usuario;
-        }
-
-
-
-
-      }
-
-      if (accion == 'abierto') {
-        obj.mensaje =
-          'EL DISPOSITIVO  ' +
-          (obj.valor == 1 ? ' HA SIDO ABIERTO' : ' HA SIDO CERRADO');
-
-        if (obj.usuario) {
-          obj.mensaje = obj.mensaje + ' POR ' + obj.usuario;
-        }
-      }
-
-      if (accion == 'energizado') {
-        obj.mensaje =
-          'EL DISPOSITIVO  ' +
-          (obj.valor == 1
-            ? ' HA SIDO ENERGIZADO (ACTIVADO)'
-            : ' HA DESENERGIZADO (DESACTIVADO)');
-
-        if (obj.usuario) {
-          obj.mensaje = obj.mensaje + ' POR ' + obj.usuario;
-        }
-      }
-
-      if (accion == 'intrusion') {
-        obj.mensaje =
-          'INTRUSION ' +
-          (obj.valor == 1 ? 'DETECTADA' : 'FINALIZADA') +
-          ' EN EL DISPOSITIVO';
-      }
-
-      if (accion == 'forzado') {
-        obj.mensaje =
-          'FORZADO ' +
-          (obj.valor == 1 ? 'DETECTADO' : 'FINALIZADO') +
-          ' EN EL DISPOSITIVO ';
-      }
-
-
-      if (accion == 'audio' && obj.valor == 10) {
-
-        obj.mensaje =
-          'EL PERIFONEO ' +
-          (obj.valor == 0
-            ? 'HA SIDO DESACTIVADO'
-            : ' HA SIDO ACTIVADO');
-
-        if (obj.usuario) {
-          obj.mensaje = obj.mensaje + ' POR ' + obj.usuario;
-        }
-
-      } else if (accion == 'audio') {
-        obj.mensaje =
-          'EL AUDIO ' +
-          (obj.valor == 0
-            ? 'HA SIDO APAGADO'
-            : '#' + obj.valor + ' HA SIDO REPRODUCIDO') +
-          ' EN EL DISPOSITIVO ';
-
-        if (obj.usuario) {
-          obj.mensaje = obj.mensaje + ' POR ' + obj.usuario;
-        }
-      }
-
-      if (accion == 'encendido1') {
-        obj.mensaje =
-          'LA ALARMA DE ROBOS ' +
-          (obj.valor == 1 ? ' HA SIDO ENCENDIDA' : ' HA SIDO APAGADA');
-
-        if (obj.usuario) {
-          obj.mensaje = obj.mensaje + ' POR ' + obj.usuario;
-        }
-      }
-
-      if (accion == 'encendido2') {
-        obj.mensaje =
-          'LA ALARMA DE INCENDIO ' +
-          (obj.valor == 1 ? ' HA SIDO ENCENDIDA' : ' HA SIDO APAGADA');
-
-        if (obj.usuario) {
-          obj.mensaje = obj.mensaje + ' POR ' + obj.usuario;
-        }
-      }
-
-      if (accion == 'encendido3') {
-        obj.mensaje =
-          'LA ALARMA DE EMERGENCIA MEDICA ' +
-          (obj.valor == 1 ? ' HA SIDO ENCENDIDA' : ' HA SIDO APAGADA');
-
-        if (obj.usuario) {
-          obj.mensaje = obj.mensaje + ' POR ' + obj.usuario;
-        }
-      }
+      obj.mensaje = this.getAccionMensaje(obj);
     }
 
     obj.since = new Date();
-    if (this.items.filter((a) => a.id == obj.id).length == 0) {
-      this.items.push(obj);
-      /*
-      this.zone.run(() => {
-        console.log('force update the screen');
-      }); */
 
-      console.log('oush');
-      console.log(this.items.length);
-    } else {
-      /*
-      for (let index = 0; index < this.items.length; index++) {
-        let element = this.items[index];
-
-        if (element.id == obj.id) {
-          this.items[index] = obj;
-          this.zone.run(() => {
-            console.log('force update the screen');
-          });
-          console.log('rep');
-          console.log(this.items.length);
-          return;
-        }
-      }
-      */
+    if (!this.notificationExists(obj)) {
+      this.notifications.push(obj);
     }
-    console.log(this.items.length);
   }
+
+  getAccionMensaje(obj: any): string {
+    const { accion, valor, usuario } = obj;
+
+    switch (accion) {
+      case 'tiempoabiertoexcesivo':
+        return `TIEMPO EXCESIVO ${valor == 1 ? 'DETECTADO' : 'FINALIZADO'}`;
+      case 'corriente':
+        return `EL DISPOSITIVO ${valor == 1 ? 'HA ENTRADO A TRABAJAR CON CORRIENTE' : 'HA DEJADO DE TRABAJAR CON CORRIENTE'}`;
+      case 'bateria':
+        return `EL DISPOSITIVO ${valor == 1 ? 'HA ENTRADO A TRABAJAR CON BATERIA' : 'HA DEJADO DE TRABAJAR CON BATERIA'}`;
+      case 'encendido':
+        return `EL DISPOSITIVO ${valor == 1 ? 'HA SIDO ENCENDIDO' : 'HA SIDO APAGADO'}${usuario ? ` POR ${usuario}` : ''}`;
+      case 'abierto':
+        return `EL DISPOSITIVO ${valor == 1 ? 'HA SIDO ABIERTO' : 'HA SIDO CERRADO'}${usuario ? ` POR ${usuario}` : ''}`;
+      case 'energizado':
+        return `EL DISPOSITIVO ${valor == 1 ? 'HA SIDO ENERGIZADO (ACTIVADO)' : 'HA DESENERGIZADO (DESACTIVADO)'}${usuario ? ` POR ${usuario}` : ''}`;
+      case 'intrusion':
+        return `INTRUSION ${valor == 1 ? 'DETECTADA' : 'FINALIZADA'} EN EL DISPOSITIVO`;
+      case 'forzado':
+        return `FORZADO ${valor == 1 ? 'DETECTADO' : 'FINALIZADO'} EN EL DISPOSITIVO`;
+      case 'audio':
+        return this.getAudioAccionMensaje(obj);
+      case 'encendido1':
+        return `LA ALARMA DE ROBOS ${valor == 1 ? 'HA SIDO ENCENDIDA' : 'HA SIDO APAGADA'}${usuario ? ` POR ${usuario}` : ''}`;
+      case 'encendido2':
+        return `LA ALARMA DE INCENDIO ${valor == 1 ? 'HA SIDO ENCENDIDA' : 'HA SIDO APAGADA'}${usuario ? ` POR ${usuario}` : ''}`;
+      case 'encendido3':
+        return `LA ALARMA DE EMERGENCIA MEDICA ${valor == 1 ? 'HA SIDO ENCENDIDA' : 'HA SIDO APAGADA'}${usuario ? ` POR ${usuario}` : ''}`;
+      default:
+        return '';
+    }
+  }
+
+  getAudioAccionMensaje(obj: any): string {
+    const { valor, usuario } = obj;
+    if (valor === 10) {
+      return `EL PERIFONEO ${valor === 0 ? 'HA SIDO DESACTIVADO' : `HA SIDO ACTIVADO${usuario ? ` POR ${usuario}` : ''}`}`;
+    } else {
+      return `EL AUDIO ${valor === 0 ? 'HA SIDO APAGADO' : `#${valor} HA SIDO REPRODUCIDO EN EL DISPOSITIVO${usuario ? ` POR ${usuario}` : ''}`}`;
+    }
+  }
+
+  notificationExists(obj: any): boolean {
+    return this.notifications.some((notification) => notification.id === obj.id);
+  }
+
+
 }
