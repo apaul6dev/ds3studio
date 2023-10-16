@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { NotificacionesService } from './notificaciones.service';
 import { Router } from "@angular/router";
+import { DetalleNotificacionService } from "./detalle-notificacion/detalle-notificacion.service";
 
 @Component({
   selector: 'app-notificaciones',
@@ -12,7 +13,8 @@ export class NotificacionesComponent implements OnInit {
   pagina = 1;
   notifications: any[] = [];
 
-  constructor(private router: Router, private notificacionesService: NotificacionesService) {
+  constructor(private router: Router, private notificacionesService: NotificacionesService,
+    private detalleNotificacionService: DetalleNotificacionService) {
   }
 
   ngOnInit(): void {
@@ -24,10 +26,12 @@ export class NotificacionesComponent implements OnInit {
     this.obtenerDatos(this.pagina);
   }
 
-  goToNotificationDetail(notificacion: any) {
-    console.log("ver notificacion", notificacion);
+  goToNotificationDetail(notification: any) {
+    console.log("ver notificacion", notification);
 
-    //this.router.navigate(['/detalle', id]);
+    this.detalleNotificacionService.notification = notification;
+
+    this.router.navigate(['/notificaciones/detalleNotificacion']);
   }
 
 

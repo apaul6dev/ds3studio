@@ -1,0 +1,48 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayout.gt-sm="row wrap">
+    <div fxFlex="100" class="p-2">
+        <mat-card class="custom-card">
+            <mat-card-header class="bg-primary" fxLayoutAlign="space-between center">
+                <mat-card-title fxLayoutAlign="center center">{{ notification.titulo }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="py-3">
+                <div fxLayout="column" fxLayoutAlign="start stretch" fxLayout.gt-sm="row wrap">
+                    <div fxFlex="15" class="p-2">
+                        <img mat-card-image style="width: 40px; height: auto;" src="{{notification.icono}}" alt="5">
+                        <span style="font-size: 0.7rem"> {{notification.fevento | relativeTime }}</span>
+                    </div>
+                    <div fxFlex="85" class="p-2">
+                        <p>
+                            {{notification.mensaje}}
+                        </p>
+
+                        <div fxLayout="row wrap">
+                            <div fxFlex="100" class="p-2"> 
+                                <google-map [center]="center" [zoom]="zoom" >
+                                    <map-directions-renderer *ngIf="(directionsResults$ | async) as directionsResults"
+                                    [directions]="directionsResults"></map-directions-renderer>
+                                </google-map>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-card-actions fxLayoutAlign="end center">
+                <button mat-raised-button color="primary" class="m-1" (click)="atras()">
+                    ¿Como llegar?
+                </button>
+                <button mat-raised-button color="primary" class="m-1" (click)="shareOnGoogleMaps(notification.latitud,notification.longitud)">
+                    Compartir
+                    <mat-icon>share</mat-icon>
+                </button>
+
+                <button mat-raised-button color="primary" class="m-1" (click)="atras()">
+                    Atrás
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

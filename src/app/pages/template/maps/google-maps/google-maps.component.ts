@@ -7,6 +7,7 @@ import { Settings } from '../../../../app.settings.model';
   templateUrl: './google-maps.component.html'
 })
 export class GoogleMapsComponent {
+  
   settings: Settings; 
   center: google.maps.LatLngLiteral = { lat: 45.421530, lng: -75.697193 };
   zoom = 7;
