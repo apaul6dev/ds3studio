@@ -88,18 +88,22 @@ export class InicioComponent implements OnInit {
   }
 
   encender1(val: any) {
+    console.log('encender', val);
+    
     this.dispositivo.encendido1 = val;
     this.dispositivo.accion = 'encendido1';
     this.cambiarEstado();
   }
 
   encender2(val: any) {
+    console.log('encender', val);
     this.dispositivo.encendido2 = val;
     this.dispositivo.accion = 'encendido2';
     this.cambiarEstado();
   }
 
   encender3(val: any) {
+    console.log('encender', val);
     this.dispositivo.encendido3 = val;
     this.dispositivo.accion = 'encendido3';
     this.cambiarEstado();
@@ -362,6 +366,7 @@ export class InicioComponent implements OnInit {
     await popover.present();
   } */
 
+  
 
   abrirDispositivos() {
     this.router.navigateByUrl('/dispositivos');
@@ -371,15 +376,28 @@ export class InicioComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 2000
+      duration: 5000
     });
   }
 
-  startPressTimer() {
+  startPressTimer(accionboton:any) {
     // Reiniciar el progreso
     this.progress = 1;
     this.timerId = setTimeout(() => {
       console.log('Botón presionado por 2 segundos completos');
+
+      if (accionboton == 'robo') {
+        this.encender1(this.dispositivo.encendido1 == 1 ? 0 : 1);
+      }
+
+      if (accionboton == 'incendio') {
+        this.encender2(this.dispositivo.encendido2 == 1 ? 0 : 1);
+      }
+
+      if (accionboton == 'medica') {
+        this.encender3(this.dispositivo.encendido3 == 1 ? 0 : 1);
+      }
+
     }, this.duration);
     // Actualizar el progreso
     this.updateProgress();

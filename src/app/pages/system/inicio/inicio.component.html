@@ -37,7 +37,7 @@
              (touchstart)="presionar('robo')"
               (touchend)="soltar('robo')" /-->
 
-            <img [src]="imagenes['roboiconoactual']" alt="" class="img-size" (mousedown)="startPressTimer()"
+            <img [src]="imagenes['roboiconoactual']" alt="" class="img-size"  (mousedown)="startPressTimer('robo')"
               (mouseup)="stopPressTimer()" />
 
 
@@ -60,7 +60,7 @@
             <img [src]="imagenes['fuegoiconoactual']" alt="" class="img-size"
           (touchstart)="presionar('incendio')" (touchend)="soltar('incendio')" /-->
 
-            <img [src]="imagenes['fuegoiconoactual']" alt="" class="img-size" (mousedown)="startPressTimer()"
+            <img [src]="imagenes['fuegoiconoactual']" alt="" class="img-size-2"  (mousedown)="startPressTimer('incendio')"
               (mouseup)="stopPressTimer()" />
 
           </div>
@@ -73,7 +73,7 @@
             <!--img [src]="imagenes['sosiconoactual']" alt="" class="img-size"
             (touchstart)="presionar('medica')" (touchend)="soltar('medica')" /-->
 
-            <img [src]="imagenes['sosiconoactual']" alt="" class="img-size" (mousedown)="startPressTimer()"
+            <img [src]="imagenes['sosiconoactual']" alt="" class="img-size-3"  (mousedown)="startPressTimer('medica')"
               (mouseup)="stopPressTimer()" />
 
           </div>
