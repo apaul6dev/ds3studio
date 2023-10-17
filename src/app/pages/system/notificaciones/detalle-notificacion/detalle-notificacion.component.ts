@@ -14,73 +14,55 @@ import { Observable } from "rxjs";
 export class DetalleNotificacionComponent implements OnInit {
     notification: any;
 
-    settings: Settings;
-    /*
-        center: google.maps.LatLngLiteral = { lat: 45.421530, lng: -75.697193 };
-        //zoom = 7;
-    
-        //markerOptions: google.maps.MarkerOptions = { draggable: false };
-        
-        markerPositions: google.maps.LatLngLiteral[] = [
-            { lat: 45.421530, lng: -75.697193 }
-        ]; 
-    
-    
-        //center: google.maps.LatLngLiteral = { lat: 40.7128, lng: -74.0060 }; // Reemplaza con tu ubicación central
-        zoom = 5;
-      
-        miUbicacion: google.maps.LatLngLiteral = { lat: 40.7128, lng: -74.0060 }; // Reemplaza con tu ubicación actual
-        puntoDeLlegada: google.maps.LatLngLiteral = { lat: 40.7530, lng: -73.9835 }; // Reemplaza con tu punto de llegada
-      
-        markerOptions: google.maps.MarkerOptions = {
-          animation: google.maps.Animation.DROP,
-        };
-      
-        polylineOptions: google.maps.PolylineOptions = {
-          strokeColor: '#FF0000',
-          strokeOpacity: 1.0,
-          strokeWeight: 2,
-        };
-      
-        ruta: google.maps.LatLngLiteral[] = [this.miUbicacion, this.puntoDeLlegada]; */
+    settings: Settings; 
+    center: google.maps.LatLngLiteral = { lat: 45.421530, lng: -75.697193 };
+    zoom = 7;
+    markerOptions: google.maps.MarkerOptions = { draggable: false };
+    markerPositions: google.maps.LatLngLiteral[] = [
+      { lat: 45.421530, lng: -75.697193 }
+    ];
 
-    center: google.maps.LatLngLiteral = { lat: 24, lng: 12 };
-    zoom = 4;
-
-    readonly directionsResults$: Observable<google.maps.DirectionsResult | undefined | any>;
-
-    constructor(mapDirectionsService: MapDirectionsService,
+    constructor(private mapDirectionsService: MapDirectionsService,
         private router: Router, public appSettings: AppSettings, private detalleNotificacionService: DetalleNotificacionService) {
         this.settings = this.appSettings.settings;
 
         this.notification = this.detalleNotificacionService.notification;
         console.log("recibiendo notificacion: ", this.notification);
+
         this.center.lat = this.notification.latitud;
         this.center.lng = this.notification.longitud;
 
-        const request: google.maps.DirectionsRequest = {
-            destination: { lat: 12, lng: 4 },
-            origin: { lat: 14, lng: 8 },
-            travelMode: google.maps.TravelMode.DRIVING
-        };
-
-        /*
-        this.directionsResults$ = mapDirectionsService.route(request).pipe(
-            map((response: any) => response.result)
-        ); */
     }
 
 
 
     ngOnInit() {
-
+       //  this.calcularRuta();
     }
 
 
+    calcularRuta() {
+        // Define the origin and destination points
+        const origin = { lat: 40.7128, lng: -74.0060 }; // Example: New York
+        const destination = { lat: 34.0522, lng: -118.2437 }; // Example: Los Angeles
 
+        // Configure the route options
+        const routeOptions = {
+            origin: origin,
+            destination: destination,
+            travelMode: google.maps.TravelMode.DRIVING, // You can use 'WALKING', 'BICYCLING', etc.
+        };
 
-
-
+        // Call MapDirectionsService to calculate the route
+        this.mapDirectionsService.route(routeOptions)
+            .subscribe((result) => {
+                // 'result' contains information about the route
+                console.log(result);
+            }, (error) => {
+                // Error handling
+                console.error('Error calculating the route:', error);
+            });
+    }
 
 
     shareOnGoogleMaps(lat: any, lng: any): void {

@@ -17,9 +17,10 @@
 
                         <div fxLayout="row wrap">
                             <div fxFlex="100" class="p-2"> 
-                                <google-map [center]="center" [zoom]="zoom" >
-                                    <map-directions-renderer *ngIf="(directionsResults$ | async) as directionsResults"
-                                    [directions]="directionsResults"></map-directions-renderer>
+                                <google-map [center]="center" [zoom]="zoom">
+                                    <map-marker *ngFor="let markerPosition of markerPositions"
+                                                [position]="markerPosition"
+                                                [options]="markerOptions"></map-marker>
                                 </google-map>
                             </div>
                         </div>
