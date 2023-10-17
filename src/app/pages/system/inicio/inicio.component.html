@@ -1,5 +1,102 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayout.gt-sm="row wrap">
+
+  <div fxFlex="100" class="p-2">
+    <mat-card class="custom-card">
+      <mat-card-header class="bg-primary" fxLayoutAlign="space-between center">
+        <mat-card-title fxLayoutAlign="center center"></mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content class="py-3">
+        <div fxLayout="column" fxLayoutAlign="start stretch" fxLayout.gt-sm="row wrap">
+
+          <div fxFlex="33" class="p-2" fxLayoutAlign="center center">
+
+          </div>
+          <div fxFlex="33" class="p-2" fxLayoutAlign="center center">
+
+            <img src="{{config.urllogo}}" alt="" class="img-size" />
+
+          </div>
+
+          <div fxFlex="34" class="p-2" fxLayoutAlign="center center">
+
+          </div>
+
+          <!--           -----------          ---------- -------------------            ---------   -->
+
+          <div fxFlex="33" class="p-2" fxLayoutAlign="center center">
+
+          </div>
+          <div fxFlex="33" class="p-2" fxLayoutAlign="center center">
+
+            <!--button mat-raised-button (mousedown)="startPressTimer()" (mouseup)="stopPressTimer()">
+              Presiona por 3 segundos
+            </button>
+
+            <img [src]="imagenes['roboiconoactual']" alt="" class="img-size"
+             (touchstart)="presionar('robo')"
+              (touchend)="soltar('robo')" /-->
+
+            <img [src]="imagenes['roboiconoactual']" alt="" class="img-size" (mousedown)="startPressTimer()"
+              (mouseup)="stopPressTimer()" />
 
 
 
-<button mat-raised-button (mousedown)="startPressTimer()" (mouseup)="stopPressTimer()">Presiona por 3 segundos</button>
-<mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+          </div>
+
+          <div fxFlex="34" class="p-2" fxLayoutAlign="center center">
+
+          </div>
+
+
+          <!--           -----------          ---------- -------------------            ---------   -->
+
+          <div fxFlex="33" class="p-2" fxLayoutAlign="center center">
+
+            <!--button mat-raised-button (mousedown)="startPressTimer()" (mouseup)="stopPressTimer()">
+              Presiona por 3 segundos
+            </button>
+
+            <img [src]="imagenes['fuegoiconoactual']" alt="" class="img-size"
+          (touchstart)="presionar('incendio')" (touchend)="soltar('incendio')" /-->
+
+            <img [src]="imagenes['fuegoiconoactual']" alt="" class="img-size" (mousedown)="startPressTimer()"
+              (mouseup)="stopPressTimer()" />
+
+          </div>
+          <div fxFlex="33" class="p-2" fxLayoutAlign="center center">
+
+          </div>
+
+          <div fxFlex="34" class="p-2" fxLayoutAlign="center center">
+
+            <!--img [src]="imagenes['sosiconoactual']" alt="" class="img-size"
+            (touchstart)="presionar('medica')" (touchend)="soltar('medica')" /-->
+
+            <img [src]="imagenes['sosiconoactual']" alt="" class="img-size" (mousedown)="startPressTimer()"
+              (mouseup)="stopPressTimer()" />
+
+          </div>
+
+          <!--           -----------          ---------- -------------------            ---------   -->
+
+        </div>
+
+      </mat-card-content>
+      <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+
+      <mat-divider></mat-divider>
+      <mat-card-actions fxLayoutAlign="end center">
+
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div fxFlex="100" fxLayoutAlign="center center">
+    <button mat-stroked-button color="primary" class="m-1" (click)="abrirDispositivos()">
+      Ir a Dispositivos
+      <mat-icon>link</mat-icon>
+    </button>
+  </div>
+
+</div>
