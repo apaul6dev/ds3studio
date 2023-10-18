@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" fxLayout.gt-sm="row wrap">
 
-  <div fxLayout="row wrap" fxLayoutAlign="center center">
-    <div fxFlex="50" fxFlex="100" *ngIf="dispositivo.controlcerco !== 0">
+  <div fxFlex="100" fxLayoutAlign="center center">
+    <div fxFlex="33" fxLayoutAlign="center center" *ngIf="dispositivo.controlcerco !== 0">
       <div fxFlex="100" fxLayoutAlign="center center">
         <img class="image-icon" *ngIf="dispositivo.energizado === 0" src="assets/iconos/appcercoencender.png" alt=""
           (click)="encender()" />
@@ -10,99 +10,101 @@
       </div>
     </div>
 
-    <div fxFlex="50" fxFlex="100" *ngIf="dispositivo.controlpuerta !== 0">
-      < <div fxFlex="100" fxLayoutAlign="center center">
+    <div fxFlex="33" fxLayoutAlign="center center">
+      <div fxFlex="100" fxLayoutAlign="center center" *ngIf="dispositivo.controlpuerta !== 0">
         <img class="image-icon" *ngIf="dispositivo.abierto === 0" src="assets/iconos/apppuertaabrir.png" alt=""
           (click)="abrir()" />
         <img class="image-icon" *ngIf="dispositivo.abierto !== 0" src="assets/iconos/apppuertacerrar.png" alt=""
           (click)="cerrar()" />
+      </div>
+
+    </div>
+
+    <div fxFlex="33" fxLayoutAlign="center center">
+      <div fxFlex="100" fxLayoutAlign="center center" *ngIf="dispositivo.controlporton !== 0">
+        <img class="image-icon" *ngIf="dispositivo.abierto === 0" src="assets/iconos/appportonabrir.png" alt=""
+          (click)="abrir()" />
+        <img class="image-icon" *ngIf="dispositivo.abierto !== 0" src="assets/iconos/appportoncerrar.png" alt=""
+          (click)="cerrar()" />
+      </div>
+    </div>
+  </div>
+
+
+  <div fxFlex="100" fxLayoutAlign="center center" *ngIf="dispositivo.controlalarma!=0">
+
+    <div fxFlex="33" fxLayoutAlign="center center">
+      <img class="image-icon" *ngIf="!(dispositivo.encendido1!=0)" src="assets/iconos/robooff.png" alt=""
+        (click)="encender1(1)" />
+      <img class="image-icon" *ngIf="dispositivo.encendido1!=0" src="assets/iconos/roboon.png" alt=""
+        (click)="encender1(0)" />
+    </div>
+    <div fxFlex="33" fxLayoutAlign="center center">
+      <img class="image-icon" *ngIf="!(dispositivo.encendido2!=0)" src="assets/iconos/fuegooff.png" alt=""
+        (click)="encender2(1)" />
+      <img class="image-icon" *ngIf="dispositivo.encendido2!=0" src="assets/iconos/fuegoon.png" alt=""
+        (click)="encender2(0)" />
+    </div>
+    <div fxFlex="33" fxLayoutAlign="center center">
+      <img class="image-icon" *ngIf="!(dispositivo.encendido3!=0)" src="assets/iconos/sosoff.png" alt=""
+        (click)="encender3(1)" />
+      <img class="image-icon" *ngIf="dispositivo.encendido3!=0" src="assets/iconos/soson.png" alt=""
+        (click)="encender3(0)" />
     </div>
 
   </div>
 
-  <div fxFlex="50" fxFlex="100" *ngIf="dispositivo.controlporton !== 0">
-    <div fxFlex="100" fxLayoutAlign="center center">
-      <img class="image-icon" *ngIf="dispositivo.abierto === 0" src="assets/iconos/appportonabrir.png" alt=""
-        (click)="abrir()" />
-      <img class="image-icon" *ngIf="dispositivo.abierto !== 0" src="assets/iconos/appportoncerrar.png" alt=""
-        (click)="cerrar()" />
+  <div fxLayout="row wrap" fxLayoutAlign="center center"
+    *ngIf="dispositivo.controlaudio !== 0 || dispositivo.controlperifoneo !== 0">
+    <ng-container *ngFor="let audioconf of listadeaudios; let i = index">
+      <div fxFlex.gt-sm="50" fxFlex="100" fxLayoutAlign="center center">
+        <img class="image-icon" *ngIf="dispositivo.audio !== audioconf.audioid" [src]="audioconf.iconoff" alt=""
+          (click)="audio(audioconf.audioid)" />
+        <img class="image-icon" *ngIf="dispositivo.audio === audioconf.audioid" [src]="audioconf.iconon" alt=""
+          (click)="audio(0)" />
+      </div>
+    </ng-container>
+  </div>
+
+  <div fxFlex="100" fxLayoutAlign="center center" *ngIf="dispositivo.controlnombre==0">
+    <div fxFlex="100" fxLayoutAlign="center center" *ngIf="dispositivo.controlnombre > 1">
+      <h2 style="text-transform: uppercase;" mat-header>{{ dispositivo.nombre }}</h2>
+    </div>
+    <div fxFlex="100" fxLayoutAlign="center center" *ngIf="dispositivo.controlnombre === 1">
+      <h2 style="text-transform: uppercase;" mat-header>{{ dispositivo.nombre }}</h2>
     </div>
   </div>
-</div>
 
-
-<div fxFlex="100" fxLayoutAlign="center center" *ngIf="dispositivo.controlalarma!=0">
-
-  <div fxFlex="33" fxLayoutAlign="center center">
-    <img class="image-icon" *ngIf="!(dispositivo.encendido1!=0)" src="assets/iconos/robooff.png" alt=""
-      (click)="encender1(1)" />
-    <img class="image-icon" *ngIf="dispositivo.encendido1!=0" src="assets/iconos/roboon.png" alt=""
-      (click)="encender1(0)" />
-  </div>
-  <div fxFlex="33" fxLayoutAlign="center center">
-    <img class="image-icon" *ngIf="!(dispositivo.encendido2!=0)" src="assets/iconos/fuegooff.png" alt=""
-      (click)="encender2(1)" />
-    <img class="image-icon" *ngIf="dispositivo.encendido2!=0" src="assets/iconos/fuegoon.png" alt=""
-      (click)="encender2(0)" />
-  </div>
-  <div fxFlex="33" fxLayoutAlign="center center">
-    <img class="image-icon" *ngIf="!(dispositivo.encendido3!=0)" src="assets/iconos/sosoff.png" alt=""
-      (click)="encender3(1)" />
-    <img class="image-icon" *ngIf="dispositivo.encendido3!=0" src="assets/iconos/soson.png" alt=""
-      (click)="encender3(0)" />
-  </div>
-
-</div>
-
-<div fxLayout="row wrap" fxLayoutAlign="center center"
-  *ngIf="dispositivo.controlaudio !== 0 || dispositivo.controlperifoneo !== 0">
-  <ng-container *ngFor="let audioconf of listadeaudios; let i = index">
-    <div fxFlex.gt-sm="50" fxFlex="100" fxLayoutAlign="center center">
-      <img class="image-icon" *ngIf="dispositivo.audio !== audioconf.audioid" [src]="audioconf.iconoff" alt=""
-        (click)="audio(audioconf.audioid)" />
-      <img class="image-icon" *ngIf="dispositivo.audio === audioconf.audioid" [src]="audioconf.iconon" alt=""
-        (click)="audio(0)" />
+  <div fxFlex="100" fxLayoutAlign="center center">
+    <div fxFlex="50" fxLayoutAlign="center center" *ngIf="dispositivo.controlarmar!=0">
+      <img class="image-icon" *ngIf="dispositivo.armado!=0" src="assets/iconos/armadoon.png" alt=""
+        (click)="armar(0)" />
+      <img class="image-icon" *ngIf="!(dispositivo.armado!=0)" src="assets/iconos/armadooff.png" alt=""
+        (click)="armar(1)" />
     </div>
-  </ng-container>
-</div>
 
-<div fxFlex="100" fxLayoutAlign="center center" *ngIf="dispositivo.controlnombre==0">
-  <div fxFlex="100" fxLayoutAlign="center center" *ngIf="dispositivo.controlnombre > 1">
-    <h2 style="text-transform: uppercase;" mat-header>{{ dispositivo.nombre }}</h2>
-  </div>
-  <div fxFlex="100" fxLayoutAlign="center center" *ngIf="dispositivo.controlnombre === 1">
-    <h2 style="text-transform: uppercase;" mat-header>{{ dispositivo.nombre }}</h2>
-  </div>
-</div>
-
-<div fxFlex="100" fxLayoutAlign="center center">
-  <div fxFlex="50" fxLayoutAlign="center center" *ngIf="dispositivo.controlarmar!=0">
-    <img class="image-icon" *ngIf="dispositivo.armado!=0" src="assets/iconos/armadoon.png" alt="" (click)="armar(0)" />
-    <img class="image-icon" *ngIf="!(dispositivo.armado!=0)" src="assets/iconos/armadooff.png" alt=""
-      (click)="armar(1)" />
+    <div fxFlex="50" fxLayoutAlign="center center" *ngIf="dispositivo.controlauxiliar!=0">
+      <img class="image-icon" *ngIf="dispositivo.auxiliar!=0" src="assets/iconos/auxiliaron.png" alt=""
+        (click)="setAuxiliar(0)" />
+      <img class="image-icon" *ngIf="!(dispositivo.auxiliar!=0)" src="assets/iconos/auxiliaroff.png" alt=""
+        (click)="setAuxiliar(1)" />
+    </div>
   </div>
 
-  <div fxFlex="50" fxLayoutAlign="center center" *ngIf="dispositivo.controlauxiliar!=0">
-    <img class="image-icon" *ngIf="dispositivo.auxiliar!=0" src="assets/iconos/auxiliaron.png" alt=""
-      (click)="setAuxiliar(0)" />
-    <img class="image-icon" *ngIf="!(dispositivo.auxiliar!=0)" src="assets/iconos/auxiliaroff.png" alt=""
-      (click)="setAuxiliar(1)" />
+  <div fxFlex="100" fxLayoutAlign="center center">
+    <div fxFlex="50" fxLayoutAlign="center center" *ngIf="dispositivo.controlestadoenergia">
+      <img *ngIf="dispositivo.corriente" src="/assets/iconos/corrienteon.png" alt="Corriente On"
+        class="img-size-fuentes " />
+      <img *ngIf="!dispositivo.corriente" src="/assets/iconos/corrienteoff.png" alt="Corriente Off"
+        class="img-size-fuentes " />
+      <span>CORRIENTE</span>
+    </div>
+    <div fxFlex="50" fxLayoutAlign="center center" *ngIf="dispositivo.controlestadoenergia">
+      <img *ngIf="dispositivo.bateria" src="/assets/iconos/bateriaon.png" alt="Batería On" class="img-size-fuentes " />
+      <img *ngIf="!dispositivo.bateria" src="/assets/iconos/bateriaoff.png" alt="Batería Off"
+        class="img-size-fuentes " />
+      <span color="primary">BATERÍA</span>
+    </div>
   </div>
-</div>
-
-<div fxFlex="100" fxLayoutAlign="center center">
-  <div fxFlex="50" fxLayoutAlign="center center" *ngIf="dispositivo.controlestadoenergia">
-    <img *ngIf="dispositivo.corriente" src="/assets/iconos/corrienteon.png" alt="Corriente On"
-      class="img-size-fuentes " />
-    <img *ngIf="!dispositivo.corriente" src="/assets/iconos/corrienteoff.png" alt="Corriente Off"
-      class="img-size-fuentes " />
-    <span>CORRIENTE</span>
-  </div>
-  <div fxFlex="50" fxLayoutAlign="center center" *ngIf="dispositivo.controlestadoenergia">
-    <img *ngIf="dispositivo.bateria" src="/assets/iconos/bateriaon.png" alt="Batería On" class="img-size-fuentes " />
-    <img *ngIf="!dispositivo.bateria" src="/assets/iconos/bateriaoff.png" alt="Batería Off" class="img-size-fuentes " />
-    <span color="primary">BATERÍA</span>
-  </div>
-</div>
 
 </div>
