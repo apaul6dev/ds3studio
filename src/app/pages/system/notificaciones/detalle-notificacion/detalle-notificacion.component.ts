@@ -4,7 +4,6 @@ import { Router } from "@angular/router";
 import { Settings } from "src/app/app.settings.model";
 import { AppSettings } from "src/app/app.settings";
 import { MapDirectionsService } from '@angular/google-maps';
-import { Observable } from "rxjs";
 
 @Component({
     selector: 'app-detalle-notificacion',

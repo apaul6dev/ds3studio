@@ -37,7 +37,7 @@
              (touchstart)="presionar('robo')"
               (touchend)="soltar('robo')" /-->
 
-            <img [src]="imagenes['roboiconoactual']" alt="" class="img-size"  (mousedown)="startPressTimer('robo')"
+            <img [src]="imagenes['roboiconoactual']" alt="" class="img-size" (mousedown)="startPressTimer('robo')"
               (mouseup)="stopPressTimer()" />
 
 
@@ -60,8 +60,8 @@
             <img [src]="imagenes['fuegoiconoactual']" alt="" class="img-size"
           (touchstart)="presionar('incendio')" (touchend)="soltar('incendio')" /-->
 
-            <img [src]="imagenes['fuegoiconoactual']" alt="" class="img-size-2"  (mousedown)="startPressTimer('incendio')"
-              (mouseup)="stopPressTimer()" />
+            <img [src]="imagenes['fuegoiconoactual']" alt="" class="img-size-2"
+              (mousedown)="startPressTimer('incendio')" (mouseup)="stopPressTimer()" />
 
           </div>
           <div fxFlex="33" class="p-2" fxLayoutAlign="center center">
@@ -73,7 +73,7 @@
             <!--img [src]="imagenes['sosiconoactual']" alt="" class="img-size"
             (touchstart)="presionar('medica')" (touchend)="soltar('medica')" /-->
 
-            <img [src]="imagenes['sosiconoactual']" alt="" class="img-size-3"  (mousedown)="startPressTimer('medica')"
+            <img [src]="imagenes['sosiconoactual']" alt="" class="img-size-3" (mousedown)="startPressTimer('medica')"
               (mouseup)="stopPressTimer()" />
 
           </div>
@@ -92,11 +92,25 @@
     </mat-card>
   </div>
 
+  <div fxFlex="100" fxLayoutAlign="center center" *ngIf="config.tienealarmas && config.mostrarenergia">
+    <div fxFlex="50%" class="p-2" fxLayoutAlign="center center">
+      <img *ngIf="dispositivo.corriente" src="/assets/iconos/corrienteon.png" alt="" class="img-size-fuentes" />
+      <img *ngIf="!dispositivo.corriente" src="/assets/iconos/corrienteoff.png" alt="" class="img-size-fuentes" />
+    </div>
+    <div fxFlex="50%" class="p-2" fxLayoutAlign="center center">
+      <img *ngIf="dispositivo.bateria" src="/assets/iconos/bateriaon.png" alt="" class="img-size-fuentes" />
+      <img *ngIf="!dispositivo.bateria" src="/assets/iconos/bateriaoff.png" alt="" class="img-size-fuentes" />
+    </div>
+  </div>
+
   <div fxFlex="100" fxLayoutAlign="center center">
-    <button mat-stroked-button color="primary" class="m-1" (click)="abrirDispositivos()">
-      Ir a Dispositivos
-      <mat-icon>link</mat-icon>
-    </button>
+    <div *ngIf="config.mostrardispositivos">
+      <button mat-stroked-button color="primary" class="m-1" (click)="abrirDispositivos()">
+        Ir a Dispositivos
+        <mat-icon>link</mat-icon>
+      </button>
+    </div>
+
   </div>
 
 </div>
