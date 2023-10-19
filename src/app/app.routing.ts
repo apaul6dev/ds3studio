@@ -6,6 +6,7 @@ import { PagesComponent } from './pages/pages.component';
 //import { SearchComponent } from './pages/template/search/search.component';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { ErrorComponent } from './pages/errors/error/error.component';
+import { AuthGuard } from './shared/guard.service';
 
 export const routes: Routes = [
     {
@@ -29,11 +30,11 @@ export const routes: Routes = [
             { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } },
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },
             */
-            { path: '', loadChildren: () => import('./pages/system/inicio/inicio.module').then(m => m.InicioModule), data: { breadcrumb: 'Inicio' } },
-            { path: 'dispositivos', loadChildren: () => import('./pages/system/dispositivos/dispositivos.module').then(m => m.DispositivosModule), data: { breadcrumb: 'Dispositivos' } },
-            { path: 'notificaciones', loadChildren: () => import('./pages/system/notificaciones/notificaciones.module').then(m => m.NotificacionesModule), data: { breadcrumb: 'Notificaciones' } },
-            { path: 'chat', loadChildren: () => import('./pages/system/chat/chat.module').then(m => m.ChatModule), data: { breadcrumb: 'Mensajes' } },
-            { path: 'comunidad', loadChildren: () => import('./pages/system/comunidad/comunidad.module').then(m => m.ComunidadModule), data: { breadcrumb: 'Comunidad' } },
+            { path: '', loadChildren: () => import('./pages/system/inicio/inicio.module').then(m => m.InicioModule), data: { breadcrumb: 'Inicio' }, canActivate: [AuthGuard]},
+            { path: 'dispositivos', loadChildren: () => import('./pages/system/dispositivos/dispositivos.module').then(m => m.DispositivosModule), data: { breadcrumb: 'Dispositivos' }, canActivate: [AuthGuard] },
+            { path: 'notificaciones', loadChildren: () => import('./pages/system/notificaciones/notificaciones.module').then(m => m.NotificacionesModule), data: { breadcrumb: 'Notificaciones' }, canActivate: [AuthGuard] },
+            { path: 'chat', loadChildren: () => import('./pages/system/chat/chat.module').then(m => m.ChatModule), data: { breadcrumb: 'Mensajes' }, canActivate: [AuthGuard] },
+            { path: 'comunidad', loadChildren: () => import('./pages/system/comunidad/comunidad.module').then(m => m.ComunidadModule), data: { breadcrumb: 'Comunidad' }, canActivate: [AuthGuard] },
 
         ]
     },

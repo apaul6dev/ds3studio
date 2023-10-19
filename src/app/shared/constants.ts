@@ -14,6 +14,8 @@ export const HTTP_OPTIONS = {
     }),
 }; */
 
+export const REINTENTOS = 3;
+
 export const CONFING = {
     tienecamaras: true,
     tienelogo: true,
@@ -26,21 +28,21 @@ export const CONFING = {
 
 
 export const IMAGENES = {
-    sosoff: "../../../assets/iconos/sosoff.png",
-    soson: "../../../assets/iconos/soson.png",
-    sosofftoon: "../../../assets/iconos/sos.gif",
-    sosofftooff: "../../../assets/iconos/sosoff.gif",
-    sosiconoactual: "../../../assets/iconos/sosoff.png",
+    sosoff: "/assets/iconos/sosoff.png",
+    soson: "/assets/iconos/soson.png",
+    sosofftoon: "/assets/iconos/sos.gif",
+    sosofftooff: "/assets/iconos/sosoff.gif",
+    sosiconoactual: "/assets/iconos/sosoff.png",
 
-    robooff: "../../../assets/iconos/robooff.png",
-    roboon: "../../../assets/iconos/roboon.png",
-    roboofftoon: "../../../assets/iconos/robo.gif",
-    roboofftooff: "../../../assets/iconos/robooff.gif",
-    roboiconoactual: "../../../assets/iconos/robooff.png",
+    robooff: "/assets/iconos/robooff.png",
+    roboon: "/assets/iconos/roboon.png",
+    roboofftoon: "/assets/iconos/robo.gif",
+    roboofftooff: "/assets/iconos/robooff.gif",
+    roboiconoactual: "/assets/iconos/robooff.png",
 
-    fuegooff: "../../../assets/iconos/fuegooff.png",
-    fuegoon: "../../../assets/iconos/fuegoon.png",
-    fuegoofftoon: "../../../assets/iconos/fuego.gif",
-    fuegoofftooff: "../../../assets/iconos/fuegooff.gif",
-    fuegoiconoactual: "../../../assets/iconos/fuegooff.png",
+    fuegooff: "/assets/iconos/fuegooff.png",
+    fuegoon: "/assets/iconos/fuegoon.png",
+    fuegoofftoon: "/assets/iconos/fuego.gif",
+    fuegoofftooff: "/assets/iconos/fuegooff.gif",
+    fuegoiconoactual: "/assets/iconos/fuegooff.png",
 }

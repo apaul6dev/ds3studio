@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "gradus": {
+    "ds3seguridad": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -94,10 +94,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "gradus:build:production"
+              "browserTarget": "ds3seguridad:build:production"
             },
             "development": {
-              "browserTarget": "gradus:build:development"
+              "browserTarget": "ds3seguridad:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -105,7 +105,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "gradus:build"
+            "browserTarget": "ds3seguridad:build"
           }
         },
         "test": {
