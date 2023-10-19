@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 //import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth'
 //import { Observable } from "rxjs";
 import { HOST, TOKEN_NAME } from "src/app/shared/constants";
@@ -8,6 +9,8 @@ import { HOST, TOKEN_NAME } from "src/app/shared/constants";
     providedIn: 'root'
 })
 export class LoginService {
+    
+    datosCambio = new Subject<any>(); 
 
     url = `${HOST}/logincontroller`;
 

@@ -40,6 +40,8 @@ export class LoginComponent {
         this.dataUser = rs.data;
         this.dataConfigUser = rs.config;
 
+        this.loginService.datosCambio.next(rs.data);
+
         sessionStorage.setItem(TOKEN_NAME, this.dataUser.token);
         sessionStorage.setItem(CONFIG_NAME, JSON.stringify(this.dataConfigUser));
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { AppSettings } from '../../../app.settings';
 import { Settings } from '../../../app.settings.model';
 import { MenuService } from '../menu/menu.service';
@@ -12,15 +12,30 @@ import { LoginService } from '../../../pages/login/login.service';
   providers: [MenuService]
 })
 export class SidenavComponent implements OnInit {
-  public userImage = '../assets/img/users/user.jpg';
+
+  public userImage = '../assets/img/users/default-user.jpg';
+
+  public user = {
+    name: 'Nombre', lastname: 'Apellido'
+  }
+
   public menuItems: Array<any>;
   public settings: Settings;
-  constructor(public appSettings: AppSettings, public menuService: MenuService, private loginService: LoginService) {
+
+  constructor(public appSettings: AppSettings, public menuService: MenuService,
+    private loginService: LoginService) {
     this.settings = this.appSettings.settings;
   }
 
   ngOnInit() {
     this.menuItems = this.menuService.getVerticalMenuItems();
+    this.loginService.datosCambio.subscribe(
+      rs => {
+        this.user.name = rs.nombres;
+        this.user.lastname = rs.apellidos;
+      }
+    );
+    console.log('Recuperado', this.user);
   }
 
   logout() {
