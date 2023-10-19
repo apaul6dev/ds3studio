@@ -10,11 +10,12 @@
                                 <img matListItemAvatar [src]="userImage">
                             </mat-list-item>
                         </mat-list>
-                        <button mat-icon-button [matMenuTriggerFor]="userMenu" #userMenuTrigger="matMenuTrigger">
+                        <!--button mat-icon-button [matMenuTriggerFor]="userMenu" #userMenuTrigger="matMenuTrigger">
                             <mat-icon>more_vert</mat-icon>
-                        </button>
+                        </button-->
                     </mat-toolbar>
-                    <mat-menu #userMenu="matMenu" xPosition="before" overlapTrigger="true">
+
+                    <!--mat-menu #userMenu="matMenu" xPosition="before" overlapTrigger="true">
                         <span (mouseleave)="userMenuTrigger.closeMenu()">
                             <button mat-menu-item>
                                 <mat-icon>account_circle</mat-icon>
@@ -29,10 +30,12 @@
                                 <span>Exit chat</span>
                             </a>
                         </span>
-                    </mat-menu>
+                    </mat-menu-->
+
                     <mat-nav-list class="p-0 chat-sidenav-list">
                         <ng-scrollbar pointerEventsMethod="scrollbar">
                             <mat-list-item *ngFor="let chat of chats" (click)="getChat(chat)">
+                                <!--mat-list-item *ngFor="let chat of chats" (click)="getChat(chat)"-->
                                 <img matListItemAvatar [src]="chat.image">
                                 <h6 matListItemTitle> {{chat.author}} </h6>
                                 <p matListItemLine fxLayout="row" fxLayoutAlign="none center" class="muted-text pt-1">
@@ -65,11 +68,11 @@
                             </mat-list>
                             <span *ngIf="currentChat" class="author-name">{{currentChat.author}}</span>
                         </div>
-                        <button mat-icon-button [matMenuTriggerFor]="personMenu" #personMenuTrigger="matMenuTrigger">
+                        <!--button mat-icon-button [matMenuTriggerFor]="personMenu" #personMenuTrigger="matMenuTrigger">
                             <mat-icon>more_vert</mat-icon>
-                        </button>
+                        </button-->
                     </mat-toolbar>
-                    <mat-menu #personMenu="matMenu" xPosition="before" overlapTrigger="true">
+                    <!--mat-menu #personMenu="matMenu" xPosition="before" overlapTrigger="true">
                         <span (mouseleave)="personMenuTrigger.closeMenu()">
                             <button mat-menu-item>
                                 <mat-icon>account_circle</mat-icon>
@@ -84,7 +87,8 @@
                                 <span>Clear chat</span>
                             </button>
                         </span>
-                    </mat-menu>
+                    </mat-menu -->
+
                     <div class="chat-content">
                         <ng-scrollbar pointerEventsMethod="scrollbar">
                             <mat-list *ngIf="talks" class="p-0">
@@ -100,7 +104,7 @@
                             </mat-list>
                             <div *ngIf="!talks" fxLayout="column" fxLayoutAlign="center center" class="h-100 empty">
                                 <mat-icon>chat</mat-icon>
-                                <p>Select a interlocutor for talk</p>
+                                <p>Seleccione a interlocutor para escribir</p>
                             </div>
                         </ng-scrollbar>
                     </div>
@@ -112,9 +116,9 @@
                                     [(ngModel)]="newMessage">
                             </mat-form-field>
                             <div fxLayout="row" fxLayoutAlign="center center">
-                                <button mat-icon-button type="button" class="mx-2">
+                                <!--button mat-icon-button type="button" class="mx-2">
                                     <mat-icon>attach_file</mat-icon>
-                                </button>
+                                </button-->
                                 <button mat-mini-fab color="primary" type="button" (click)="sendMessage($event)">
                                     <mat-icon>send</mat-icon>
                                 </button>
