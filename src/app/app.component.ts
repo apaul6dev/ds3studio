@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppSettings } from './app.settings';
 import { Settings } from './app.settings.model';
-import { SwUpdate } from '@angular/service-worker';
+import { MessageService } from './shared/messages.service';
 
 @Component({
   selector: 'app-root',
@@ -9,18 +9,17 @@ import { SwUpdate } from '@angular/service-worker';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   public settings: Settings;
-  constructor(public appSettings: AppSettings, private swUpdate: SwUpdate) {
+
+  constructor(public appSettings: AppSettings, private messageService: MessageService) {
     this.settings = this.appSettings.settings;
   }
 
   ngOnInit(): void {
-    if (this.swUpdate.isEnabled) {
-      this.swUpdate.available.subscribe(() => {
-        if (confirm('New version available. Load it?')) {
-          window.location.reload();
-        }
-      });
-    }
+   
   }
+
+
+
 }

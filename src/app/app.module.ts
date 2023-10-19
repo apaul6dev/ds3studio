@@ -37,6 +37,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 //import { provideAuth, getAuth } from '@angular/fire/auth';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
+import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
   imports: [
@@ -59,8 +63,14 @@ import { AuthInterceptor } from './shared/auth.interceptor';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    
     //provideFirebaseApp(() => initializeApp(environment.firebase)),
-    //provideAuth(() => getAuth())
+    // provideAuth(() => getAuth()),
+    //AngularFireMessagingModule,
+    //AngularFireModule
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireMessagingModule
+
   ],
   declarations: [
     AppComponent,

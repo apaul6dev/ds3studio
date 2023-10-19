@@ -3,7 +3,6 @@ import { AppSettings } from '../../../app.settings';
 import { Settings } from '../../../app.settings.model';
 import { Chat } from './chat.model';
 import { ChatService } from './chat.service';
-import { ChatMessageServer } from './chat-model';
 
 @Component({
   selector: 'app-chat',
