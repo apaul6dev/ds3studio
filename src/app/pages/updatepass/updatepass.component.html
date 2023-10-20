@@ -24,7 +24,7 @@
                             <mat-error *ngIf="form.controls.oldPassword.hasError('minlength')">Minimo 6 caracteres</mat-error>
                         </mat-form-field>
                         <mat-form-field class="w-100">
-                            <input matInput placeholder="Password" formControlName="password" type="password"
+                            <input matInput placeholder="Nueva Contraseña" formControlName="password" type="password"
                                 minlength="6">
                             <mat-error *ngIf="form.controls.password.errors?.required">
                                 Contraseña nueva es requerida
@@ -34,7 +34,7 @@
                             </mat-error>
                         </mat-form-field>
                         <mat-form-field class="w-100">
-                            <input matInput placeholder="Confirm Password" formControlName="confirmPassword"
+                            <input matInput placeholder="Confirmar Nueva Contraseña" formControlName="confirmPassword"
                                 type="password">
                             <mat-error *ngIf="form.controls.confirmPassword.errors?.required">
                                 Contraseña nueva es requerida
