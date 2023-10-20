@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import firebase from 'firebase'
-import { Observable } from 'rxjs';
+import { initializeApp } from 'firebase/app';
+import { getMessaging, getToken, onMessage } from 'firebase/messaging';
+import { Observable, Subject } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { MessagePayload } from './notification-interfaces';
 
@@ -9,33 +10,42 @@ import { MessagePayload } from './notification-interfaces';
 })
 export class PushNotificationService {
   
-  messagingFirebase: firebase.messaging.Messaging;
+  private messagingFirebase: any; // Cambiar el tipo de la variable a "any"
 
   constructor() {
-    firebase.initializeApp(environment.firebase);
-    this.messagingFirebase = firebase.messaging();
+    const firebaseConfig = environment.firebase;
+    const app = initializeApp(firebaseConfig);
+    this.messagingFirebase = getMessaging(app);
   }
 
   requestPermission = () => {
     return new Promise(async (resolve, reject) => {
-      const permsis = await Notification.requestPermission();
-      if (permsis === "granted") {
-        const tokenFirebase = await this.messagingFirebase.getToken();
-        resolve(tokenFirebase);
-      } else {
-        reject(new Error("No se otorgaron los permisos"))
+      try {
+        const permsis = await Notification.requestPermission();
+        if (permsis === "granted") {
+          const tokenFirebase = await getToken(this.messagingFirebase);
+          resolve(tokenFirebase);
+        } else {
+          reject(new Error("No se otorgaron los permisos"));
+        }
+      } catch (error) {
+        reject(error);
       }
-    })
+    });
   }
 
-  private messaginObservable = new Observable<MessagePayload>(observe => {
-    this.messagingFirebase.onMessage((payload: any) => {
-      observe.next(payload)
-    })
-  })
+  private messageSubject = new Subject<MessagePayload>();
 
-  receiveMessage() {
-    return this.messaginObservable;
+  private subscribeToMessages() {
+    onMessage(this.messagingFirebase, (payload:any) => {
+      this.messageSubject.next(payload);
+    });
   }
 
+  receiveMessage(): Observable<MessagePayload> {
+    if (!this.messageSubject.observers.length) {
+      this.subscribeToMessages();
+    }
+    return this.messageSubject.asObservable();
+  }
 }
