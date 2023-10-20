@@ -3,6 +3,7 @@ import { AppSettings } from '../../../app.settings';
 import { Settings } from '../../../app.settings.model';
 import { MenuService } from '../menu/menu.service';
 import { LoginService } from '../../../pages/login/login.service';
+import { DATA_USER } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-sidenav',
@@ -14,9 +15,9 @@ import { LoginService } from '../../../pages/login/login.service';
 export class SidenavComponent implements OnInit {
 
   public userImage = '../assets/img/users/default-user.jpg';
-
   public user = {
-    name: 'Nombre', lastname: 'Apellido'
+    name: "",
+    lastname: ""
   }
 
   public menuItems: Array<any>;
@@ -29,13 +30,14 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit() {
     this.menuItems = this.menuService.getVerticalMenuItems();
-    this.loginService.datosCambio.subscribe(
-      rs => {
-        this.user.name = rs.nombres;
-        this.user.lastname = rs.apellidos;
-      }
-    );
-    console.log('Recuperado', this.user);
+    const tmpUser = sessionStorage.getItem(DATA_USER)
+    if (tmpUser) {
+      let dataUser = JSON.parse(tmpUser);
+      this.user.name = dataUser.name;
+      this.user.lastname = dataUser.lastname;
+      //console.log('Recuperado:', dataUser);
+    }
+
   }
 
   logout() {

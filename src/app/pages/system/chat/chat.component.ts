@@ -3,6 +3,8 @@ import { AppSettings } from '../../../app.settings';
 import { Settings } from '../../../app.settings.model';
 import { Chat } from './chat.model';
 import { ChatService } from './chat.service';
+import { ChatMessageServer } from './chat-model';
+import { DATA_USER } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-chat',
@@ -21,52 +23,49 @@ export class ChatComponent implements OnInit {
   public currentChat: Chat;
   public newMessage: string;
 
+  public user = {
+    name: "",
+    lastname: ""
+  }
+
   constructor(public appSettings: AppSettings, private chatService: ChatService) {
     this.settings = this.appSettings.settings;
   }
 
   ngOnInit() {
-    /*
-    this.chats.push(new Chat(
-      'assets/img/avatars/avatar-9.png',
-      'Comunidad',
-      'Online',
-      'Comunidad',
-      new Date(),
-      false
-    )); */
+
+    const tmpUser = sessionStorage.getItem(DATA_USER)
+    if (tmpUser) {
+      let dataUser = JSON.parse(tmpUser);
+      this.user.name = dataUser.name;
+      this.user.lastname = dataUser.lastname;
+      //console.log('Recuperado:', dataUser);
+    }
 
     this.chats = this.chatService.getChats();
+
+    this.chatService.datosCambio.subscribe(
+      rs => {
+        console.log("enviado datos. ", rs);
+        let newMsg: any = {
+          nombres: rs.author,
+          avatar: 'assets/img/profile/comunidad.png',
+          fcreacion: Date.now(),
+          texto: rs.text,
+          estado: 'pending',
+          yo: true,
+          tracker: Math.random().toString(36).substring(2),
+        };
+        this.chatService.sendMesg(newMsg).subscribe(rs => {
+          console.log('sendMsg', rs);
+        });
+      }
+    );
 
     if (window.innerWidth <= 768) {
       this.sidenavOpen = false;
     }
-
-    // ---------------------------------------- 
-    /*
-    this.chatService.getMensajes({id: null, pagina: 1 }).subscribe(rs => {
-      console.log('getMensajes', rs);
-      if (rs.estado && rs.estado == 'OK') {
-        const listaTmp: ChatMessageServer[] = rs.data;
-        //console.log(listaTmp);
-        listaTmp.forEach(ms => {
-          let newChat = new Chat(
-            this.userImage,
-            ms.nombres,
-            'Online',
-            ms.texto,
-            new Date(ms.fcreacion),
-            true)
-          this.talks.push(newChat);
-        });
-        //console.log(this.chats, this.talks);
-        // this.getChat(this.chats[0]);
-      }
-    }); */
-
   }
-
-
 
 
   @HostListener('window:resize')
@@ -76,16 +75,31 @@ export class ChatComponent implements OnInit {
 
   public getChat(obj: any) {
     if (this.talks) {
-      this.talks.length = 2;
+      this.talks.length = 0;
     }
-    this.talks = this.chatService.getTalk();
-    this.talks.push(obj);
-    this.currentChat = obj;
-    this.talks.forEach(talk => {
-      if (!talk.my) {
-        talk.image = obj.image;
+
+    this.chatService.getMensajes({ id: null, pagina: 1 }).subscribe(rs => {
+      if (rs.estado && rs.estado == 'OK') {
+        this.talks.push(obj);
+        const listaTmp: ChatMessageServer[] = rs.data;
+        listaTmp.forEach(ms => {
+          let tmp = new Chat(
+            'assets/img/profile/comunidad.png',
+            ms.nombres,
+            'Pendiente',
+            ms.texto, new Date(ms.fcreacion), true)
+          this.talks.unshift(tmp);
+        });
+        this.currentChat = obj;
+        this.talks.forEach(talk => {
+          if (!talk.my) {
+            talk.image = obj.image;
+          }
+        });
       }
     });
+
+
     if (window.innerWidth <= 768) {
       this.sidenav.close();
     }
@@ -94,16 +108,16 @@ export class ChatComponent implements OnInit {
   public sendMessage($event: any) {
     if (($event.which === 1 || $event.which === 13) && this.newMessage.trim() != '') {
       if (this.talks) {
-        this.talks.push(
-          new Chat(
-            'assets/img/users/user.jpg',
-            'Emilio Verdines',
-            'online',
-            this.newMessage,
-            new Date(),
-            true)
-        )
+        const msg = new Chat(
+          'assets/img/users/default-user.jpg',
+          `${this.user.name} ${this.user.lastname}`,
+          'online',
+          this.newMessage,
+          new Date(),
+          true);
+        this.talks.push(msg);
         this.newMessage = '';
+        this.chatService.datosCambio.next(msg);
         let chatContainer = document.querySelector('.chat-content');
         if (chatContainer) {
           setTimeout(() => {
@@ -127,21 +141,6 @@ export class ChatComponent implements OnInit {
   }
 
   sendMsg() {
-
-    let newMsg: any = {
-      nombres: 'tmp nombres',
-      avatar: '',
-      fcreacion: Date.now(),
-      texto: 'tmp textos sssss ',
-      estado: 'pending',
-      yo: true,
-      tracker: Math.random().toString(36).substring(2),
-    };
-
-    this.chatService.sendMesg(newMsg).subscribe(rs => {
-      console.log('sendMsg', rs);
-
-    });
 
     /*
     if (!this.editorMsg.trim()) return;

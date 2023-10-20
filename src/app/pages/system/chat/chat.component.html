@@ -98,6 +98,9 @@
                                         <span [ngClass]="(talk.my) ? 'bg-primary' : 'bg-accent'">{{talk.text}}</span>
                                     </p>
                                     <p class="message-date">
+                                        <small>{{talk.author}}</small>
+                                    </p>
+                                    <p class="message-date">
                                         <small>{{talk.date | date:"dd MMMM, yyyy 'at' HH:mm"}}</small>
                                     </p>
                                 </mat-list-item>

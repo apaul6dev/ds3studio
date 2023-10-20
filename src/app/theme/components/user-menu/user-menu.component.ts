@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { LoginService } from 'src/app/pages/login/login.service';
+import { DATA_USER } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-user-menu',
@@ -8,23 +9,23 @@ import { LoginService } from 'src/app/pages/login/login.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class UserMenuComponent implements OnInit {
-  
+
   public userImage = './assets/img/users/default-user.jpg';
 
   public user = {
-    name: 'Nombre', lastname: 'Apellido'
+    name: '', lastname: ''
   }
 
-  constructor( private loginService: LoginService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.loginService.datosCambio.subscribe(
-      rs => {
-        this.user.name = rs.nombres;
-        this.user.lastname = rs.apellidos;
-      }
-    );
-    console.log('Recuperado', this.user);
+    const tmpUser = sessionStorage.getItem(DATA_USER)
+    if (tmpUser) {
+      let dataUser = JSON.parse(tmpUser);
+      this.user.name = dataUser.name;
+      this.user.lastname = dataUser.lastname;
+      //console.log('Recuperado:', dataUser);
+    }
   }
 
 }

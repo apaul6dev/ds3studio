@@ -5,7 +5,7 @@ import { emailValidator } from '../../theme/utils/app-validators';
 import { AppSettings } from '../../app.settings';
 import { Settings } from '../../app.settings.model';
 import { LoginService } from './login.service';
-import { CONFIG_NAME, TOKEN_NAME } from 'src/app/shared/constants';
+import { CONFIG_NAME, DATA_USER, TOKEN_NAME } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,7 @@ export class LoginComponent {
   ) {
     this.settings = this.appSettings.settings;
     this.form = this.fb.group({
-      'email': ["usrtest2@d3studio.tk",  Validators.required],
+      'email': ["usrtest2@d3studio.tk", Validators.required],
       'password': ["paul2023", Validators.compose([Validators.required, Validators.minLength(6)])]
     });
   }
@@ -36,12 +36,17 @@ export class LoginComponent {
       this.loginService.login({ email, password }).subscribe(rs => {
 
         console.log(rs);
-        
+
         this.dataUser = rs.data;
         this.dataConfigUser = rs.config;
 
-        this.loginService.datosCambio.next(rs.data);
+        const data = {
+          name: rs.data.nombres,
+          lastname: rs.data.apellidos
+        }
 
+        sessionStorage.setItem(DATA_USER, JSON.stringify(data));
+        
         sessionStorage.setItem(TOKEN_NAME, this.dataUser.token);
         sessionStorage.setItem(CONFIG_NAME, JSON.stringify(this.dataConfigUser));
 
