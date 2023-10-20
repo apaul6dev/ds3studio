@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppSettings } from './app.settings';
 import { Settings } from './app.settings.model';
-import { MessagingService } from './shared/message.service';
+import { PushNotificationService } from './shared/push-notification.service';
 
 @Component({
   selector: 'app-root',
@@ -10,19 +10,21 @@ import { MessagingService } from './shared/message.service';
 })
 export class AppComponent implements OnInit {
 
+  mesaggeReceived: any = '';
   public settings: Settings;
 
-  constructor(public appSettings: AppSettings, private messageService: MessagingService) {
+  constructor(public appSettings: AppSettings, private notificacion: PushNotificationService) {
     this.settings = this.appSettings.settings;
-    this.messageService.requestPermission();
-    this.messageService.receiveMessage();
+    notificacion.requestPermission().then(token => {
+      console.log(token);
+    })
   }
 
   ngOnInit(): void {
-    this.messageService.currentMessage.subscribe(resp => {
-      console.log('Mensaje', resp);
-
-    });
+    this.notificacion.receiveMessage().subscribe(payload => {
+      console.log(payload);
+      this.mesaggeReceived = payload.notification.title;
+    })
   }
 
 

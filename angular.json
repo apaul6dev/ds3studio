@@ -52,13 +52,14 @@
             "styles": [
               "src/styles.scss"
             ],
-            "allowedCommonJsDependencies": [ 
-              "leaflet-map", 
+            "allowedCommonJsDependencies": [
+              "leaflet-map",
               "dragula",
               "clone-deep",
               "quill",
               "rfdc",
-              "bezier-easing"
+              "bezier-easing", 
+              "lodash"
             ],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
@@ -120,7 +121,9 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/manifest.json",
+              "src/firebase-messaging-sw.js"
             ],
             "styles": [
               "src/styles.scss"
