@@ -5,6 +5,7 @@ import { Chat } from './chat.model';
 import { ChatService } from './chat.service';
 import { ChatMessageServer } from './chat-model';
 import { DATA_USER } from 'src/app/shared/constants';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-chat',
@@ -23,12 +24,14 @@ export class ChatComponent implements OnInit {
   public currentChat: Chat;
   public newMessage: string;
 
+  public moreMessages = false;
+
   public user = {
     name: "",
     lastname: ""
   }
 
-  constructor(public appSettings: AppSettings, private chatService: ChatService) {
+  constructor(public appSettings: AppSettings, private chatService: ChatService, public snackBar: MatSnackBar) {
     this.settings = this.appSettings.settings;
   }
 
@@ -73,13 +76,41 @@ export class ChatComponent implements OnInit {
     (window.innerWidth <= 768) ? this.sidenavOpen = false : this.sidenavOpen = true;
   }
 
+  pagina = 1;
+  loadMoreMessages() {
+    this.chatService.getMensajes({ id: null, pagina: this.pagina += 1 }).subscribe(rs => {
+      if (rs.estado && rs.estado == 'OK') {
+        const listaTmp: ChatMessageServer[] = rs.data;
+        if (listaTmp.length > 0) {
+          listaTmp.forEach(ms => {
+            let tmp = new Chat(
+              'assets/img/profile/comunidad.png',
+              ms.nombres,
+              'Pendiente',
+              ms.texto, new Date(ms.fcreacion), true)
+            this.talks.unshift(tmp);
+          });
+        } else {
+          this.pagina -= 1;
+          console.log(this.pagina);
+          this.openSnackBar("No existe más mensajes", "OK");
+        }
+      }
+    });
+
+  }
+
   public getChat(obj: any) {
     if (this.talks) {
       this.talks.length = 0;
+      this.pagina = 1;
     }
 
     this.chatService.getMensajes({ id: null, pagina: 1 }).subscribe(rs => {
       if (rs.estado && rs.estado == 'OK') {
+
+        this.moreMessages = true;
+
         this.talks.push(obj);
         const listaTmp: ChatMessageServer[] = rs.data;
         listaTmp.forEach(ms => {
@@ -327,6 +358,12 @@ export class ChatComponent implements OnInit {
         console.log('Error:' + error);
       }
     ); */
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000
+    });
   }
 
 }

@@ -90,8 +90,19 @@
                     </mat-menu -->
 
                     <div class="chat-content">
+
+
+
                         <ng-scrollbar pointerEventsMethod="scrollbar">
+
                             <mat-list *ngIf="talks" class="p-0">
+
+                                <mat-list-item *ngIf="moreMessages">
+                                    <button mat-stroked-button color="primary" class="m-1" (click)="loadMoreMessages()">
+                                        Cargar mensajes anteriores
+                                    </button>
+                                </mat-list-item>
+
                                 <mat-list-item *ngFor="let talk of talks" class="talk-item">
                                     <img matListItemAvatar [src]="talk.image">
                                     <p class="message">
