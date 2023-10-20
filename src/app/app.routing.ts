@@ -7,6 +7,7 @@ import { PagesComponent } from './pages/pages.component';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { ErrorComponent } from './pages/errors/error/error.component';
 import { AuthGuard } from './shared/guard.service';
+import { AyudaOutSideComponent } from './pages/ayudaoutside/ayudaoutside.component';
 
 export const routes: Routes = [
     {
@@ -30,7 +31,7 @@ export const routes: Routes = [
             { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } },
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },
             */
-            { path: '', loadChildren: () => import('./pages/system/inicio/inicio.module').then(m => m.InicioModule), data: { breadcrumb: 'Inicio' }, canActivate: [AuthGuard]},
+            { path: '', loadChildren: () => import('./pages/system/inicio/inicio.module').then(m => m.InicioModule), data: { breadcrumb: 'Inicio' }, canActivate: [AuthGuard] },
             { path: 'dispositivos', loadChildren: () => import('./pages/system/dispositivos/dispositivos.module').then(m => m.DispositivosModule), data: { breadcrumb: 'Dispositivos' }, canActivate: [AuthGuard] },
             { path: 'notificaciones', loadChildren: () => import('./pages/system/notificaciones/notificaciones.module').then(m => m.NotificacionesModule), data: { breadcrumb: 'Notificaciones' }, canActivate: [AuthGuard] },
             { path: 'chat', loadChildren: () => import('./pages/system/chat/chat.module').then(m => m.ChatModule), data: { breadcrumb: 'Mensajes' }, canActivate: [AuthGuard] },
@@ -41,11 +42,13 @@ export const routes: Routes = [
 
         ]
     },
-    
+
+    { path: 'ayudaoutside', component: AyudaOutSideComponent },
+
     { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
     { path: 'register', loadChildren: () => import('./pages/template/register/register.module').then(m => m.RegisterModule) },
     { path: 'error', component: ErrorComponent, data: { breadcrumb: 'Error' } },
-    
+
 
     { path: '**', component: NotFoundComponent }
 ];

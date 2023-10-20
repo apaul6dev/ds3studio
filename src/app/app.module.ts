@@ -37,13 +37,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 //import { provideAuth, getAuth } from '@angular/fire/auth';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+//import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { AngularFireModule } from '@angular/fire/compat';
 import { ServerErrorsInterceptor } from './shared/server-errors.interceptor';
-import { AyudaComponent } from './pages/ayuda/ayuda.component';
-import { UpdatePassComponent } from './pages/updatepass/updatepass.component';
+import { AyudaOutSideComponent } from './pages/ayudaoutside/ayudaoutside.component';
 
 @NgModule({
   imports: [
@@ -90,7 +89,7 @@ import { UpdatePassComponent } from './pages/updatepass/updatepass.component';
     FullScreenComponent,
     ApplicationsComponent,
     MessagesComponent,
-    UserMenuComponent
+    UserMenuComponent, AyudaOutSideComponent
   ],
   providers: [
     AppSettings,
