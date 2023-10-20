@@ -1,0 +1,87 @@
+<div class="p-2">
+    <div fxLayout="column" fxLayoutAlign="start stretch" fxLayout.gt-sm="row wrap">
+
+        <div fxFlex="100" class="p-2" *ngIf="datosAyuda">
+            <mat-card class="custom-card">
+                <mat-card-header class="bg-primary" fxLayoutAlign="space-between center">
+                    <mat-card-title fxLayoutAlign="center center"></mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="py-3">
+                    <div fxLayout="column" fxLayoutAlign="start stretch" fxLayout.gt-sm="row wrap">
+
+                        <!--div fxFlex="10" class="p-2">
+                        <img mat-card-image style="width: 40px; height: auto;" src="{{notification.icono}}" alt="5">
+                    </div -->
+
+                        <div fxFlex="90" class="p-2">
+
+                            <p *ngIf="datosAyuda.texto">
+                                {{datosAyuda.texto}}
+                            </p>
+
+                            <p *ngIf="datosAyuda.subtitulo">
+                                {{datosAyuda.subtitulo}}
+                            </p>
+                            <a mat-menu-item *ngIf="datosAyuda.url" href="{{datosAyuda.url}}">
+                                <mat-icon>help_center</mat-icon>
+                                <span>Centro de ayuda</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </mat-card-content>
+                <mat-divider></mat-divider>
+
+                <mat-card-actions fxLayoutAlign="end center">
+
+                    <a mat-menu-item *ngIf="datosAyuda.celular" href="mailto: {{datosAyuda.correo}}">
+                        <mat-icon>mail</mat-icon>
+                        <span>{{datosAyuda.correo}}</span>
+                    </a>
+
+
+                    <button *ngIf="datosAyuda.celular" mat-raised-button color="primary" class="m-1"
+                        (click)="llamar(datosAyuda.celular)">
+                        Llamar
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+
+        <div fxFlex="100" class="p-2" *ngIf="!datosAyuda">
+
+            <mat-card class="custom-card">
+                <mat-card-header class="bg-primary" fxLayoutAlign="space-between center">
+                    <mat-card-title fxLayoutAlign="center center"></mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="py-3">
+                    <div fxLayout="column" fxLayoutAlign="start stretch" fxLayout.gt-sm="row wrap">
+
+                        <!--div fxFlex="10" class="p-2">
+                        <img mat-card-image style="width: 40px; height: auto;" src="{{notification.icono}}" alt="5">
+                    </div -->
+
+                        <div fxFlex="90" class="p-2">
+
+                            <p>
+                                Visita nuestro centro de ayuda para soporte:
+                            </p>
+                            <a mat-menu-item href="https://d3studio.tk/ayuda-modosmart.html" target="_blank">
+                                <mat-icon>help_center</mat-icon>
+                                <span>Centro de ayuda</span>
+                            </a>
+
+                        </div>
+                    </div>
+
+                </mat-card-content>
+                <mat-divider></mat-divider>
+
+                <mat-card-actions fxLayoutAlign="end center">
+
+                </mat-card-actions>
+
+            </mat-card>
+        </div>
+    </div>
+</div>

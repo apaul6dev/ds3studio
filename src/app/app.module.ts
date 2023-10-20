@@ -42,6 +42,8 @@ import { environment } from '../environments/environment';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { AngularFireModule } from '@angular/fire/compat';
 import { ServerErrorsInterceptor } from './shared/server-errors.interceptor';
+import { AyudaComponent } from './pages/ayuda/ayuda.component';
+import { UpdatePassComponent } from './pages/updatepass/updatepass.component';
 
 @NgModule({
   imports: [

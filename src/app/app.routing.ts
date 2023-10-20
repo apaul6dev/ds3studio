@@ -36,12 +36,17 @@ export const routes: Routes = [
             { path: 'chat', loadChildren: () => import('./pages/system/chat/chat.module').then(m => m.ChatModule), data: { breadcrumb: 'Mensajes' }, canActivate: [AuthGuard] },
             { path: 'comunidad', loadChildren: () => import('./pages/system/comunidad/comunidad.module').then(m => m.ComunidadModule), data: { breadcrumb: 'Comunidad' }, canActivate: [AuthGuard] },
 
+            { path: 'ayuda', loadChildren: () => import('./pages/ayuda/ayuda.module').then(m => m.AyudaModule), data: { breadcrumb: 'Ayuda' }, canActivate: [AuthGuard] },
+            { path: 'updatepass', loadChildren: () => import('./pages/updatepass/updatepass.module').then(m => m.UpdatePassModule), data: { breadcrumb: 'Actualizar Contraseña' }, canActivate: [AuthGuard] },
+
         ]
     },
     
     { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
     { path: 'register', loadChildren: () => import('./pages/template/register/register.module').then(m => m.RegisterModule) },
     { path: 'error', component: ErrorComponent, data: { breadcrumb: 'Error' } },
+    
+
     { path: '**', component: NotFoundComponent }
 ];
 
