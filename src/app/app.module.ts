@@ -43,6 +43,7 @@ import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { AngularFireModule } from '@angular/fire/compat';
 import { ServerErrorsInterceptor } from './shared/server-errors.interceptor';
 import { AyudaOutSideComponent } from './pages/ayudaoutside/ayudaoutside.component';
+import { RecordarPassComponent } from './pages/recordarpass/recordarpass.component';
 
 @NgModule({
   imports: [
@@ -89,7 +90,7 @@ import { AyudaOutSideComponent } from './pages/ayudaoutside/ayudaoutside.compone
     FullScreenComponent,
     ApplicationsComponent,
     MessagesComponent,
-    UserMenuComponent, AyudaOutSideComponent
+    UserMenuComponent, AyudaOutSideComponent, RecordarPassComponent
   ],
   providers: [
     AppSettings,

@@ -20,11 +20,13 @@ export class UpdatePassComponent implements OnInit {
   constructor(public appSettings: AppSettings, public fb: UntypedFormBuilder, public snackBar: MatSnackBar,
     public router: Router, private updatePassService: UpdatePassService) {
     this.settings = this.appSettings.settings;
+
     this.form = this.fb.group({
       'oldPassword': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
       'password': ['', Validators.required],
       'confirmPassword': ['', Validators.required]
     }, { validator: matchingPasswords('password', 'confirmPassword') });
+
   }
 
   ngOnInit(): void {

@@ -17,3 +17,13 @@ export function matchingPasswords(passwordKey: string, passwordConfirmationKey: 
         }
     }
 }
+
+export function matchingEmail(emailKey: string, emailConfirmationKey: string) {
+    return (group: UntypedFormGroup) => {
+        let email = group.controls[emailKey];
+        let emailConfirmation= group.controls[emailConfirmationKey];
+        if (email.value !== emailConfirmation.value) {
+            return emailConfirmation.setErrors({mismatchedEmail: true})
+        }
+    }
+}

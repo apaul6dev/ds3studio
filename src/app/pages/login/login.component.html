@@ -7,10 +7,14 @@
 
             <mat-card class="p-0 box">
                 <div fxLayout="column" fxLayoutAlign="center center" class="bg-primary box-header">
-                    <button mat-button color="accent" class="mat-elevation-z12" (click)="recordarPassword();">
+                    <!--button mat-button color="accent" class="mat-elevation-z12" (click)="recordarPassword();">
                         ¿Olvido su contraseña?
                         <mat-icon>vpn_key</mat-icon>
-                    </button>
+                    </button-->
+                    <a mat-button routerLink="/recordarpass"> ¿Olvido su contraseña?
+                        <mat-icon>vpn_key</mat-icon>
+                    </a>
+
                     <a mat-button routerLink="/ayudaoutside">Centro de Ayuda</a>
                 </div>
                 <mat-card-content fxLayout="column" fxLayoutAlign="end center" class="box-content">
@@ -20,9 +24,9 @@
                         <mat-form-field class="w-100">
                             <input matInput placeholder="Email" formControlName="email">
                             <mat-error *ngIf="form.controls.email.errors?.required">Email es requerido</mat-error>
-                            <mat-error *ngIf="form.controls.email.hasError('invalidEmail')">
+                            <!--mat-error *ngIf="form.controls.email.hasError('invalidEmail')">
                                 Email Incorrecto
-                            </mat-error>
+                            </mat-error-->
                         </mat-form-field>
                         <mat-form-field class="w-100">
                             <input matInput placeholder="Password" formControlName="password" type="password">

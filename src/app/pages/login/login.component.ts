@@ -24,13 +24,13 @@ export class LoginComponent {
   ) {
     this.settings = this.appSettings.settings;
     this.form = this.fb.group({
-      'email': ["usrtest2@d3studio.tk", Validators.compose([Validators.required, emailValidator])],
+      'email': ["usrtest2@d3studio.tk",  Validators.required],
       'password': ["paul2023", Validators.compose([Validators.required, Validators.minLength(6)])]
     });
   }
 
   public onSubmitLogin(values: any): void {
-    if (!this.form.valid) {
+    if (this.form.valid) {
       const email = values['email'];
       const password = values['password'];
       this.loginService.login({ email, password }).subscribe(rs => {

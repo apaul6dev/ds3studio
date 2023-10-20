@@ -3,7 +3,7 @@ import { AppSettings } from 'src/app/app.settings';
 import { Settings } from 'src/app/app.settings.model';
 
 @Component({
-  selector: 'app-ayuda',
+  selector: 'app-ayudaoutside',
   templateUrl: './ayudaoutside.component.html',
   styleUrls: ['./ayudaoutside.component.css']
 })

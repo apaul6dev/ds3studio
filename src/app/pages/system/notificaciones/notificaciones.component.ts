@@ -1,20 +1,28 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { NotificacionesService } from './notificaciones.service';
 import { Router } from "@angular/router";
 import { DetalleNotificacionService } from "./detalle-notificacion/detalle-notificacion.service";
+import { AppSettings } from "src/app/app.settings";
+import { Settings } from "src/app/app.settings.model";
 
 @Component({
   selector: 'app-notificaciones',
   templateUrl: './notificaciones.component.html',
   styleUrls: ['./notificaciones.component.scss']
 })
-export class NotificacionesComponent implements OnInit {
+export class NotificacionesComponent implements OnInit, AfterViewInit {
 
+  public settings: Settings;
   pagina = 1;
   notifications: any[] = [];
 
-  constructor(private router: Router, private notificacionesService: NotificacionesService,
+  constructor(public appSettings: AppSettings, private router: Router, private notificacionesService: NotificacionesService,
     private detalleNotificacionService: DetalleNotificacionService) {
+    this.settings = this.appSettings.settings;
+  }
+
+  ngAfterViewInit(): void {
+    this.settings.loadingSpinner = false;
   }
 
   ngOnInit(): void {

@@ -8,6 +8,7 @@ import { NotFoundComponent } from './pages/errors/not-found/not-found.component'
 import { ErrorComponent } from './pages/errors/error/error.component';
 import { AuthGuard } from './shared/guard.service';
 import { AyudaOutSideComponent } from './pages/ayudaoutside/ayudaoutside.component';
+import { RecordarPassComponent } from './pages/recordarpass/recordarpass.component';
 
 export const routes: Routes = [
     {
@@ -44,6 +45,7 @@ export const routes: Routes = [
     },
 
     { path: 'ayudaoutside', component: AyudaOutSideComponent },
+    { path: 'recordarpass', component: RecordarPassComponent },
 
     { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
     { path: 'register', loadChildren: () => import('./pages/template/register/register.module').then(m => m.RegisterModule) },
