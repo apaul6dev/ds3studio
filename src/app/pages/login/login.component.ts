@@ -56,9 +56,4 @@ export class LoginComponent {
     });
   }
 
-  recordarPassword(){
-      console.log();
-      
-  }
-
 }
