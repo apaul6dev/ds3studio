@@ -55,4 +55,9 @@ export class LoginComponent {
       this.settings.loadingSpinner = false;
     });
   }
+
+  recordarPassword(){
+    
+  }
+
 }
