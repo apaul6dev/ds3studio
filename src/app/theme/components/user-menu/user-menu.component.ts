@@ -10,7 +10,7 @@ import { DATA_USER } from 'src/app/shared/constants';
 })
 export class UserMenuComponent implements OnInit {
 
-  public userImage = './assets/img/users/default-user.jpg';
+  public userImage = 'assets/img/users/default-user.jpg';
 
   public user = {
     name: '', lastname: ''

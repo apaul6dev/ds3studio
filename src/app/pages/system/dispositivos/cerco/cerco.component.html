@@ -93,15 +93,15 @@
 
   <div fxFlex="100" fxLayoutAlign="center center">
     <div fxFlex="50" fxLayoutAlign="center center" *ngIf="dispositivo.controlestadoenergia">
-      <img *ngIf="dispositivo.corriente" src="/assets/iconos/corrienteon.png" alt="Corriente On"
+      <img *ngIf="dispositivo.corriente" src="assets/iconos/corrienteon.png" alt="Corriente On"
         class="img-size-fuentes " />
-      <img *ngIf="!dispositivo.corriente" src="/assets/iconos/corrienteoff.png" alt="Corriente Off"
+      <img *ngIf="!dispositivo.corriente" src="assets/iconos/corrienteoff.png" alt="Corriente Off"
         class="img-size-fuentes " />
       <span>CORRIENTE</span>
     </div>
     <div fxFlex="50" fxLayoutAlign="center center" *ngIf="dispositivo.controlestadoenergia">
-      <img *ngIf="dispositivo.bateria" src="/assets/iconos/bateriaon.png" alt="Batería On" class="img-size-fuentes " />
-      <img *ngIf="!dispositivo.bateria" src="/assets/iconos/bateriaoff.png" alt="Batería Off"
+      <img *ngIf="dispositivo.bateria" src="assets/iconos/bateriaon.png" alt="Batería On" class="img-size-fuentes " />
+      <img *ngIf="!dispositivo.bateria" src="assets/iconos/bateriaoff.png" alt="Batería Off"
         class="img-size-fuentes " />
       <span color="primary">BATERÍA</span>
     </div>

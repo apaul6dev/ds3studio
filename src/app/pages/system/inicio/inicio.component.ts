@@ -52,7 +52,7 @@ export class InicioComponent implements OnInit {
       }
     }
 
-
+    this.obtenerDatos();
     /*
     this.configLoaded = true;
 
@@ -89,7 +89,7 @@ export class InicioComponent implements OnInit {
 
   encender1(val: any) {
     console.log('encender', val);
-    
+
     this.dispositivo.encendido1 = val;
     this.dispositivo.accion = 'encendido1';
     this.cambiarEstado();
@@ -366,7 +366,7 @@ export class InicioComponent implements OnInit {
     await popover.present();
   } */
 
-  
+
 
   abrirDispositivos() {
     this.router.navigateByUrl('/dispositivos');
@@ -380,7 +380,7 @@ export class InicioComponent implements OnInit {
     });
   }
 
-  startPressTimer(accionboton:any) {
+  startPressTimer(accionboton: any) {
     // Reiniciar el progreso
     this.progress = 1;
     this.timerId = setTimeout(() => {

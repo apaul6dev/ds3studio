@@ -15,9 +15,10 @@ export class AppComponent implements OnInit {
 
   constructor(public appSettings: AppSettings, private notificacion: PushNotificationService) {
     this.settings = this.appSettings.settings;
+    this.settings = this.appSettings.settings;
     notificacion.requestPermission().then(token => {
       console.log(token);
-    })
+    });
   }
 
   ngOnInit(): void {
