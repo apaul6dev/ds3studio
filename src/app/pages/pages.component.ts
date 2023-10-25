@@ -3,6 +3,8 @@ import { Router, NavigationEnd } from '@angular/router';
 import { AppSettings } from '../app.settings';
 import { Settings } from '../app.settings.model';
 import { MenuService } from '../theme/components/menu/menu.service';
+import { PushNotificationService } from '../shared/push-notification.service';
+import { TokenNotificationsService } from '../shared/token-notification.service';
 
 @Component({
   selector: 'app-pages',
@@ -27,11 +29,28 @@ export class PagesComponent implements OnInit {
   private defaultMenu: string; //declared for return default menu when window resized 
   public showSidenav: boolean = false;
 
-  constructor(public appSettings: AppSettings, public router: Router, private menuService: MenuService) {
+  public mesaggeReceived: any = '';
+
+  constructor(public appSettings: AppSettings, public router: Router, private menuService: MenuService,
+    private notificacion: PushNotificationService, private tokenNotificationsService: TokenNotificationsService) {
     this.settings = this.appSettings.settings;
+    this.notificacion.requestPermission().then(token => {
+      console.log(token);
+      this.tokenNotificationsService.sendTokenToServer(token).subscribe(rs =>{
+        console.log(rs)
+      });
+    });
   }
 
   ngOnInit() {
+
+    this.notificacion.receiveMessage().subscribe(payload => {
+      console.log(payload);
+      this.mesaggeReceived = payload.notification.title;
+    });
+
+    
+
     if (window.innerWidth <= 768) {
       this.settings.menu = 'vertical';
       this.settings.sidenavIsOpened = false;
