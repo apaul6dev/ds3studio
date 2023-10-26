@@ -143,8 +143,18 @@ export class InicioComponent implements OnInit {
 
   obtenerDatos() {
 
-    this.inicioService.recuperarEstadoAlarmaComunitaria().subscribe(rs => {
-      console.log("recuperarEstadoAlarmaComunitaria", rs);
+    this.inicioService.recuperarEstadoAlarmaComunitaria().subscribe(datos => {
+      console.log("recuperarEstadoAlarmaComunitaria", datos);
+
+      this.dispositivo = datos.alarma;
+
+      this.imagenes.sosiconoactual = this.dispositivo.encendido3 ? this.imagenes.soson : this.imagenes.sosoff;
+
+      this.imagenes.roboiconoactual = this.dispositivo.encendido1 ? this.imagenes.roboon : this.imagenes.robooff;
+
+      this.imagenes.fuegoiconoactual = this.dispositivo.encendido2 ? this.imagenes.fuegoon : this.imagenes.fuegooff;
+
+      console.log('update on estado...');
 
     });
 
@@ -188,7 +198,12 @@ export class InicioComponent implements OnInit {
   cambiarEstado() {
     this.inicioService.smartboxactionalarma(this.dispositivo).subscribe(rs => {
       console.log("smartboxactionalarma", rs);
-      this.openSnackBar(rs.mensaje || 'Dispositivo actualizado', rs.titulo || 'Correcto');
+      if (rs.estado === "OK") {
+        this.obtenerDatos();
+        this.openSnackBar(rs.mensaje || 'Dispositivo actualizado', rs.titulo || 'Correcto');
+      } else {
+        this.openSnackBar(rs.mensaje || 'Error al Actualizar el estado', rs.titulo || 'Error');
+      }
     });
 
     /*

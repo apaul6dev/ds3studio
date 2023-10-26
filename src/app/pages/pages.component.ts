@@ -36,7 +36,7 @@ export class PagesComponent implements OnInit {
     this.settings = this.appSettings.settings;
     this.notificacion.requestPermission().then(token => {
       console.log(token);
-      this.tokenNotificationsService.sendTokenToServer(token).subscribe(rs =>{
+      this.tokenNotificationsService.sendTokenToServer(token).subscribe(rs => {
         console.log(rs)
       });
     });
@@ -49,7 +49,7 @@ export class PagesComponent implements OnInit {
       this.mesaggeReceived = payload.notification.title;
     });
 
-    
+
 
     if (window.innerWidth <= 768) {
       this.settings.menu = 'vertical';
