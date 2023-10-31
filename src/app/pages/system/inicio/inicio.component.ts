@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { GelocationService } from "src/app/shared/geolocation.service";
 import { CONFIG_NAME, CONFING, IMAGENES } from "src/app/shared/constants";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { SoundPlayService } from "src/app/shared/play-sound.service";
 
 @Component({
   selector: 'app-inicio',
@@ -25,12 +26,19 @@ export class InicioComponent implements OnInit {
   duration: number = 2000;
 
   public settings: Settings;
-  constructor(public appSettings: AppSettings, public snackBar: MatSnackBar, private gelocationService: GelocationService, private router: Router, private inicioService: InicioService) {
+  constructor(public appSettings: AppSettings, public snackBar: MatSnackBar,private soundPlayService: SoundPlayService,
+    private gelocationService: GelocationService, private router: Router, private inicioService: InicioService) {
     this.settings = this.appSettings.settings;
   }
 
   ngOnInit(): void {
     this.getConfigAppStart();
+
+    this.inicioService.datosCambio.subscribe(rs=>{
+      console.log('resfrescando pantalla inicio: ', rs);
+      //this.soundPlayService.soundPlayModoSmart();
+    });
+
   }
 
   getConfigAppStart() {

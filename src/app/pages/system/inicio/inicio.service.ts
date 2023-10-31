@@ -1,11 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 import { HOST } from "src/app/shared/constants";
 
 @Injectable({
     providedIn: 'root'
 })
 export class InicioService {
+    
+    datosCambio = new Subject<any>(); 
 
     url = `${HOST}`;
 

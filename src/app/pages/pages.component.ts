@@ -5,6 +5,8 @@ import { Settings } from '../app.settings.model';
 import { MenuService } from '../theme/components/menu/menu.service';
 import { PushNotificationService } from '../shared/push-notification.service';
 import { TokenNotificationsService } from '../shared/token-notification.service';
+import { InicioService } from './system/inicio/inicio.service';
+import { SoundPlayService } from '../shared/play-sound.service';
 
 @Component({
   selector: 'app-pages',
@@ -32,6 +34,7 @@ export class PagesComponent implements OnInit {
   public mesaggeReceived: any = '';
 
   constructor(public appSettings: AppSettings, public router: Router, private menuService: MenuService,
+    private inicioService: InicioService, private soundPlayService: SoundPlayService,
     private notificacion: PushNotificationService, private tokenNotificationsService: TokenNotificationsService) {
     this.settings = this.appSettings.settings;
     this.notificacion.requestPermission().then(token => {
@@ -46,7 +49,9 @@ export class PagesComponent implements OnInit {
 
     this.notificacion.receiveMessage().subscribe(payload => {
       console.log(payload);
+      this.soundPlayService.soundPlayModoSmart();
       this.mesaggeReceived = payload.notification.title;
+      this.inicioService.datosCambio.next(this.mesaggeReceived);
     });
 
 

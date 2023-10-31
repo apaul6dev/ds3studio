@@ -1,7 +1,8 @@
-
-
-.img-size, .img-size-2, .img-size-3 {
-  width: 150px; height: auto;
+.img-size,
+.img-size-2,
+.img-size-3 {
+  width: 150px;
+  height: auto;
   transition: transform 0.2s; // Agrega una transición suave para el efecto de presionar
 }
 
@@ -24,5 +25,6 @@
 }
 
 .img-size-fuentes {
-  width: 50px; height: auto;
+  width: 50px;
+  height: auto;
 }
