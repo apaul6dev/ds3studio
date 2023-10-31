@@ -33,7 +33,11 @@ export class LoginComponent {
     if (this.form.valid) {
       const email = values['email'];
       const password = values['password'];
-      this.loginService.login({ email, password }).subscribe(rs => {
+
+     // const token = 'dSDOn0H5uWlCdDDVJ3oTBB:APA91bEKv7e2hMHQzhhww-vm2LRT2F8BUrTSkfmpkFJzDnzXxORiJKqRREj7doup4KHTWS3QyAw7-WWsSHE5fppQrEPrtfDdvnGQQCWf_ORzZwpeM6sZcM2oKZOcenMI1a6WclkkOVlS';
+     const token = 'fasdfasdfasdf';
+
+     this.loginService.login({ token, email, password }).subscribe(rs => {
 
         console.log(rs);
 

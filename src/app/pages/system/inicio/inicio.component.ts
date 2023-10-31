@@ -26,17 +26,16 @@ export class InicioComponent implements OnInit {
   duration: number = 2000;
 
   public settings: Settings;
-  constructor(public appSettings: AppSettings, public snackBar: MatSnackBar,private soundPlayService: SoundPlayService,
+  constructor(public appSettings: AppSettings, public snackBar: MatSnackBar, private soundPlayService: SoundPlayService,
     private gelocationService: GelocationService, private router: Router, private inicioService: InicioService) {
     this.settings = this.appSettings.settings;
   }
 
   ngOnInit(): void {
     this.getConfigAppStart();
-
     this.inicioService.datosCambio.subscribe(rs=>{
-      console.log('resfrescando pantalla inicio: ', rs);
-      //this.soundPlayService.soundPlayModoSmart();
+      // console.log('resfrescando pantalla inicio: ', rs);
+      this.obtenerDatos();
     });
 
   }
@@ -61,6 +60,7 @@ export class InicioComponent implements OnInit {
     }
 
     this.obtenerDatos();
+   
     /*
     this.configLoaded = true;
 
