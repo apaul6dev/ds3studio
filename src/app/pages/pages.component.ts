@@ -3,6 +3,8 @@ import { Router, NavigationEnd } from '@angular/router';
 import { AppSettings } from '../app.settings';
 import { Settings } from '../app.settings.model';
 import { MenuService } from '../theme/components/menu/menu.service';
+import { TokenNotificationsService } from '../shared/token-notification.service';
+import { TOKEN_MESSAGING, TOKEN_NAME } from '../shared/constants';
 
 @Component({
   selector: 'app-pages',
@@ -27,7 +29,7 @@ export class PagesComponent implements OnInit {
   private defaultMenu: string; //declared for return default menu when window resized 
   public showSidenav: boolean = false;
 
-  constructor(public appSettings: AppSettings, public router: Router, private menuService: MenuService) {
+  constructor(public appSettings: AppSettings, public router: Router, private menuService: MenuService, private tokenNotificationsService: TokenNotificationsService) {
     this.settings = this.appSettings.settings;
   }
 
