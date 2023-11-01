@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
-import { emailValidator } from '../../theme/utils/app-validators';
+//import { emailValidator } from '../../theme/utils/app-validators';
 import { AppSettings } from '../../app.settings';
 import { Settings } from '../../app.settings.model';
 import { LoginService } from './login.service';
@@ -43,11 +43,11 @@ export class LoginComponent {
         password: password,
         messaging: this.tokenMessaging
       }
-      //this.settings.loadingSpinner = true;
+      this.settings.loadingSpinner = true;
       this.loginService.login(params).subscribe(rs => {
-        //this.settings.loadingSpinner = false;
-        console.log(rs);
-        
+        this.settings.loadingSpinner = false;
+        //console.log(rs);
+
         this.dataUser = rs.data;
         this.dataConfigUser = rs.config;
 
@@ -60,9 +60,9 @@ export class LoginComponent {
         sessionStorage.setItem(TOKEN_NAME, this.dataUser.token);
         sessionStorage.setItem(CONFIG_NAME, JSON.stringify(this.dataConfigUser));
 
-        /*this.tokenNotificationsService.sendTokenToServer(this.tokenMessaging).subscribe(rs => {
+        this.tokenNotificationsService.sendTokenToServer(this.tokenMessaging).subscribe(rs => {
           console.log('Messaging token sent to save: ', rs);
-        }); */
+        });
 
         this.router.navigate(['/']);
       });
