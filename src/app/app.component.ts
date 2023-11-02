@@ -10,6 +10,7 @@ import { ChatUpdateService } from './pages/system/chat/chat-update.service';
 import { SoundPlayService } from './shared/play-sound.service';
 import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
 import { filter, map } from 'rxjs/operators';
+import { DispositivosService } from './pages/system/dispositivos/dispositivos.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
   public settings: Settings;
   public mesaggeReceived: any = '';
 
-  constructor(public appSettings: AppSettings, private swUpdate: SwUpdate,
+  constructor(public appSettings: AppSettings, private swUpdate: SwUpdate,  private dispositivosService: DispositivosService,
     private soundPlayService: SoundPlayService, private chatUpdateService: ChatUpdateService,
     private inicioService: InicioService, private notificacionesService: NotificacionesService,
     private notificacion: PushNotificationService, public snackBar: MatSnackBar) {
@@ -68,6 +69,8 @@ export class AppComponent implements OnInit {
           this.soundPlayService.soundPlayModoSmart();
           this.inicioService.datosCambio.next(this.mesaggeReceived);
           this.notificacionesService.datosCambio.next(this.mesaggeReceived);
+          this.dispositivosService.datosCambio.next(this.mesaggeReceived);
+          
         }
 
       } else {

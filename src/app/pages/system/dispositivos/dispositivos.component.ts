@@ -17,20 +17,6 @@ export interface ChipColor {
 })
 export class DispositivosComponent implements OnInit {
 
-  /*
-  chips = [
-    { label: '1', state: false },
-    { label: '2', state: false },
-    { label: '3', state: false },
-    { label: '4', state: false },
-    { label: '5', state: false },
-    { label: '6', state: false },
-    { label: '7', state: false },
-    { label: '8', state: false },
-    { label: '9', state: false },
-    { label: '10', state: false }
-  ]; */
-
   items: any = [];
   coordenadas = { latitud: 0, longitud: 0 };
   intervalo = null;
@@ -44,6 +30,9 @@ export class DispositivosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dispositivosService.datosCambio.subscribe(rs => {
+      this.obtenerDispositivos();
+    });
     this.obtenerGeolocalizacion();
     this.obtenerDispositivos();
   }
@@ -55,18 +44,6 @@ export class DispositivosComponent implements OnInit {
   }
 
 
-  /*
-  toggleState(chip: any): void {
-    chip.state = !chip.state;
-    if (chip.state) {
-      this.chips.forEach(otherChip => {
-        if (otherChip !== chip) {
-          otherChip.state = false;
-        }
-      });
-    }
-  } */
-
   obtenerDispositivos() {
     this.dispositivosService.listar().subscribe(rs => {
       console.log(rs);
@@ -77,21 +54,9 @@ export class DispositivosComponent implements OnInit {
       } else {
         console.log("no se ha resuelto el origen de los datos");
       }
-
     }
     );
-
   }
-  
-  /*
-  async presentPopover(ev: any) {
-    const popover = await this.popoverController.create({
-      component: PopsubmenuComponent,
-      cssClass: 'my-custom-class',
-      event: ev,
-      translucent: true,
-    });
-    await popover.present();
-  } */
+
 
 }

@@ -34,7 +34,7 @@ export class LoginService {
             firetoken: params.messaging,
         }
 
-        console.log('Haciendo login: ', paramsSender);
+        //console.log('Haciendo login: ', paramsSender);
 
         return this.http.post<any>(`${this.url}/loginApp/`, paramsSender);
     }

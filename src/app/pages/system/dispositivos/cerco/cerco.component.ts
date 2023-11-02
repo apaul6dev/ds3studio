@@ -14,9 +14,8 @@ export class CercoComponentc implements OnInit {
 
   listadeaudios: any = [];
 
-  constructor(private dispositivosService: DispositivosService, public snackBar: MatSnackBar) { 
-    //console.log('inicial cerco: ',this.dispositivo, this.coordenadas);
-    
+  constructor(private dispositivosService: DispositivosService, public snackBar: MatSnackBar) {
+
   }
 
   ngOnInit(): void {
@@ -64,7 +63,7 @@ export class CercoComponentc implements OnInit {
     this.cambiarEstado();
   }
 
-  audio(numero:any) {
+  audio(numero: any) {
     this.dispositivo.audio = numero;
     this.dispositivo.accion = 'audio';
     console.log(this.dispositivo);
@@ -80,32 +79,6 @@ export class CercoComponentc implements OnInit {
       this.openSnackBar(rs.mensaje, rs.estado);
     });
 
-    /*
-    this.authHttp.post(
-      '/controlDispositivos/smartboxaction/',
-      this.dispositivo,
-      (datos) => {
-        if (this.utilitarios.handleError(datos)) {
-          console.log('Error');
-          return;
-        }
- 
-        this.utilitarios.mostrarToast(
-          datos.titulo || 'Correcto',
-          datos.mensaje || 'Dispositivo actualizado',
-          false
-        );
- 
-        console.log(datos);
-      },
-      (error) => {
-        console.log('Error' + error);
-        if (this.utilitarios.handleError(null)) {
-          console.log('Error');
-          return;
-        }
-      }
-    ); */
   }
 
   encender1(val: any) {
