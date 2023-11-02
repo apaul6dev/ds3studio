@@ -19,10 +19,14 @@ let talks: any = [
 
 ]
 
-@Injectable()
+
+@Injectable({
+    providedIn: 'root'
+})
 export class ChatService {
 
     datosCambio = new Subject<any>(); 
+    newMessage = new Subject<any>(); 
 
     url = `${HOST}`;
 

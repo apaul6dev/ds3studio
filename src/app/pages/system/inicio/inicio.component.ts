@@ -19,7 +19,7 @@ export class InicioComponent implements OnInit {
   coordenadas = { latitud: 0, longitud: 0 };
 
   config = CONFING;
-  imagenes = IMAGENES;
+  imagenes = {...IMAGENES};
 
   progress: number = 0;
   timerId: any;
@@ -35,6 +35,7 @@ export class InicioComponent implements OnInit {
     this.getConfigAppStart();
     this.inicioService.datosCambio.subscribe(rs=>{
       // console.log('resfrescando pantalla inicio: ', rs);
+      // this.soundPlayService.soundPlayModoSmart();
       this.obtenerDatos();
     });
 

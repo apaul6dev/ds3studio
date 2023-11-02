@@ -6,6 +6,8 @@ import { ChatService } from './chat.service';
 import { ChatMessageServer } from './chat-model';
 import { DATA_USER } from 'src/app/shared/constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SoundPlayService } from 'src/app/shared/play-sound.service';
+import { ChatUpdateService } from './chat-update.service';
 
 @Component({
   selector: 'app-chat',
@@ -31,11 +33,17 @@ export class ChatComponent implements OnInit {
     lastname: ""
   }
 
-  constructor(public appSettings: AppSettings, private chatService: ChatService, public snackBar: MatSnackBar) {
+  constructor(public appSettings: AppSettings, private chatService: ChatService, private chatUpdateService: ChatUpdateService,
+    public snackBar: MatSnackBar, private soundPlayService: SoundPlayService) {
     this.settings = this.appSettings.settings;
   }
 
   ngOnInit() {
+    this.chatUpdateService.datosCambio.subscribe(rs => {
+      //this.soundPlayService.soundPlayChat();
+      console.log('refrescando mensajes', rs);
+      this.refrescarUltimosMensajes();
+    });
 
     const tmpUser = sessionStorage.getItem(DATA_USER)
     if (tmpUser) {

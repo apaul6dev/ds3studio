@@ -10,7 +10,7 @@ import { Settings } from "src/app/app.settings.model";
   templateUrl: './notificaciones.component.html',
   styleUrls: ['./notificaciones.component.scss']
 })
-export class NotificacionesComponent implements OnInit, AfterViewInit {
+export class NotificacionesComponent implements OnInit {
 
   public settings: Settings;
   pagina = 1;
@@ -21,11 +21,13 @@ export class NotificacionesComponent implements OnInit, AfterViewInit {
     this.settings = this.appSettings.settings;
   }
 
-  ngAfterViewInit(): void {
-    this.settings.loadingSpinner = false;
-  }
 
   ngOnInit(): void {
+    this.notificacionesService.datosCambio.subscribe(rs => {
+      console.log('resfrescando pantalla notificaciones: ', rs);
+      this.addLastNotification();
+    });
+
     this.obtenerDatos(this.pagina);
   }
 
@@ -34,12 +36,30 @@ export class NotificacionesComponent implements OnInit, AfterViewInit {
     this.obtenerDatos(this.pagina);
   }
 
-  goToNotificationDetail(notification: any) {
-    console.log("ver notificacion", notification);
+  addLastNotification() {
+    //this.settings.loadingSpinner = true;
+    setTimeout(() => {
+      this.notificacionesService.obtenerDatos(1).subscribe(resp => {
+        //this.settings.loadingSpinner = false;
+        console.log("*****", resp);
 
-    this.detalleNotificacionService.notification = notification;
+        if (resp.lista) {
+          const listLastOne: [] = resp.lista[0];
+          console.log('Last notification', listLastOne);
 
-    this.router.navigate(['/notificaciones/detalleNotificacion']);
+          listLastOne.forEach((element: { iconoalerta: string }, index: number) => {
+            if (element.iconoalerta && element.iconoalerta == 'hand') {
+              element.iconoalerta = 'hand-left';
+            }
+            this.addElementToList(element, true);
+          });
+        } else {
+          console.log('error al cargar la lista de notificaciones!');
+        }
+        console.log(this.notifications);
+      });
+    }, 2000);
+
   }
 
 
@@ -50,16 +70,16 @@ export class NotificacionesComponent implements OnInit, AfterViewInit {
     //this.firstload = true;
     const solicitud: any = {};
     solicitud.pagina = page;
-
+    this.settings.loadingSpinner = true;
     this.notificacionesService.obtenerDatos(solicitud).subscribe(resp => {
-
+      this.settings.loadingSpinner = false;
       if (resp.lista) {
         resp.lista.forEach((element: { iconoalerta: string }, index: number) => {
           // setTimeout(() => {
           if (element.iconoalerta && element.iconoalerta == 'hand') {
             element.iconoalerta = 'hand-left';
           }
-          this.addElementToList(element);
+          this.addElementToList(element, false);
           // }, index * 100); 
         });
 
@@ -127,25 +147,30 @@ export class NotificacionesComponent implements OnInit, AfterViewInit {
     ); */
   }
 
-  addElementToList(obj: any) {
-    if (!obj || !obj.id) {
+  addElementToList(notification: any, isUpdate: boolean) {
+    if (!notification || !notification.id) {
       return;
     }
+    notification.usuario = notification.usuario ? notification.usuario.toUpperCase() : '';
+    notification.titulo = notification.titulo || (notification.dispositivo ? notification.dispositivo.toUpperCase() : 'DISPOSITIVO');
 
-    obj.usuario = obj.usuario ? obj.usuario.toUpperCase() : obj.usuario;
-    obj.titulo = obj.titulo ? obj.titulo : obj.dispositivo ? obj.dispositivo.toUpperCase() : 'DISPOSITIVO';
-
-    if (obj.mensaje) {
-      console.log('Predefined mensaje');
-    } else if (obj.accion) {
-      obj.mensaje = this.getAccionMensaje(obj);
+    if (notification.mensaje) {
+      console.log('Mensaje predefinido');
+    } else if (notification.accion) {
+      notification.mensaje = this.getAccionMensaje(notification);
     }
 
-    obj.since = new Date();
+    notification.since = new Date();
 
-    if (!this.notificationExists(obj)) {
-      this.notifications.push(obj);
+    if (!this.notificationExists(notification)) {
+      if (!isUpdate) {
+        this.notifications.push(notification);
+      } else {
+        this.notifications.unshift(notification);
+      }
+
     }
+
   }
 
   getAccionMensaje(obj: any): string {
@@ -192,6 +217,12 @@ export class NotificacionesComponent implements OnInit, AfterViewInit {
 
   notificationExists(obj: any): boolean {
     return this.notifications.some((notification) => notification.id === obj.id);
+  }
+
+  goToNotificationDetail(notification: any) {
+    console.log("ver notificacion", notification);
+    this.detalleNotificacionService.notification = notification;
+    this.router.navigate(['/notificaciones/detalleNotificacion']);
   }
 
 
