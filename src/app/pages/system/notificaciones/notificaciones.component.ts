@@ -37,16 +37,14 @@ export class NotificacionesComponent implements OnInit {
   }
 
   addLastNotification() {
-    //this.settings.loadingSpinner = true;
     setTimeout(() => {
-      this.notificacionesService.obtenerDatos(1).subscribe(resp => {
-        //this.settings.loadingSpinner = false;
-        console.log("*****", resp);
-
+      const solicitud: any = {};
+      solicitud.pagina = 1;
+      this.notificacionesService.obtenerDatos(solicitud).subscribe(resp => {
         if (resp.lista) {
-          const listLastOne: [] = resp.lista[0];
-          console.log('Last notification', listLastOne);
-
+          const listLastOne: any[] = [];
+          listLastOne.push(resp.lista[0]);
+          //console.log('Last notification', listLastOne);
           listLastOne.forEach((element: { iconoalerta: string }, index: number) => {
             if (element.iconoalerta && element.iconoalerta == 'hand') {
               element.iconoalerta = 'hand-left';
@@ -58,7 +56,7 @@ export class NotificacionesComponent implements OnInit {
         }
         console.log(this.notifications);
       });
-    }, 2000);
+    }, 500);
 
   }
 
@@ -91,60 +89,6 @@ export class NotificacionesComponent implements OnInit {
 
     });
 
-    /*
-    this.firstload = true;
-    const solicitud: any = {};
-    solicitud.pagina = this.pagina;
- 
-    this.authHttp.post(
-      '/controlDispositivos/listarEventos/',
-      solicitud,
-      (resp) => {
-        this.zone.run(() => {
-          if (this.utilitarios.handleError(resp)) {
-            console.log('Error');
-            return;
-          }
- 
-          console.log('Eventos listados...');
- 
-          this.firstload = false;
- 
-          this.exito = true;
- 
-          if (resp.lista) {
-            resp.lista.forEach((element) => {
-              if (element.iconoalerta && element.iconoalerta == 'hand') {
-                element.iconoalerta = 'hand-left';
-              }
-              this.addElementToList(element);
-            });
-          }
- 
-          console.log(this.notifications);
- 
-          this.pagina += 1;
-          const count = resp.lista ? Object.keys(resp.lista).length : 0;
-          if (count === 0) {
-            this.hayMasResultados = false;
-          } else {
-            this.hayMasResultados = true;
-          }
- 
-          this.utilitarios.ordernarLista(this.notifications, 'id', 'desc');
- 
-          console.log('force update the screenxxxx');
-        });
-      },
-      (error) => {
-        console.log('Error' + error);
-        this.exito = true;
-        if (this.utilitarios.handleError(null)) {
-          console.log('Error');
-          return;
-        }
-      }
-    ); */
   }
 
   addElementToList(notification: any, isUpdate: boolean) {
