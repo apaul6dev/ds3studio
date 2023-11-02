@@ -15,12 +15,7 @@ export class GuardService {
         if (rpta) {
             return true;
         } else {
-           /* this.loginService.logout().subscribe(rs => {
-                console.log("logout system: ", rs);
-                sessionStorage.clear();
-                this.router.navigate(['/login']);
-            }); */
-            sessionStorage.clear();
+            localStorage.clear();
             this.router.navigate(['/login']);
             return false;
         }

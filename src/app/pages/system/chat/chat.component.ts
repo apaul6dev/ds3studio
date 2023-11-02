@@ -47,7 +47,7 @@ export class ChatComponent implements OnInit {
       this.refrescarUltimosMensajes();
     });
 
-    const tmpUser = sessionStorage.getItem(DATA_USER);
+    const tmpUser = localStorage.getItem(DATA_USER);
     if (tmpUser) {
       const dataUser = JSON.parse(tmpUser);
       this.user.name = dataUser.name;

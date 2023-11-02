@@ -44,7 +44,7 @@ export class InicioComponent implements OnInit {
     this.coordenadas.latitud = resp.latitude;
     this.coordenadas.longitud = resp.longitude;
 
-    const confString = sessionStorage.getItem(CONFIG_NAME);
+    const confString = localStorage.getItem(CONFIG_NAME);
 
     if (confString) {
       try {
@@ -83,7 +83,7 @@ export class InicioComponent implements OnInit {
   obtenerConfiguracion() {
     this.inicioService.getConfiguracion().subscribe(rs => {
       console.log("obtenerConfiguracion", rs);
-      sessionStorage.setItem(CONFIG_NAME, JSON.stringify(rs));
+      localStorage.setItem(CONFIG_NAME, JSON.stringify(rs));
     });
   }
 

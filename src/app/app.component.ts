@@ -8,6 +8,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificacionesService } from './pages/system/notificaciones/notificaciones.service';
 import { ChatUpdateService } from './pages/system/chat/chat-update.service';
 import { SoundPlayService } from './shared/play-sound.service';
+import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -19,10 +21,22 @@ export class AppComponent implements OnInit {
   public settings: Settings;
   public mesaggeReceived: any = '';
 
-  constructor(public appSettings: AppSettings, private soundPlayService: SoundPlayService, private chatUpdateService: ChatUpdateService,
+  constructor(public appSettings: AppSettings, private swUpdate: SwUpdate,
+    private soundPlayService: SoundPlayService, private chatUpdateService: ChatUpdateService,
     private inicioService: InicioService, private notificacionesService: NotificacionesService,
     private notificacion: PushNotificationService, public snackBar: MatSnackBar) {
     this.settings = this.appSettings.settings;
+
+    if (this.swUpdate.isEnabled) {
+      const updatesAvailable = swUpdate.versionUpdates.pipe(
+        filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'),
+        map(evt => ({
+          type: 'UPDATE_AVAILABLE',
+          current: evt.currentVersion,
+          available: evt.latestVersion,
+        })));
+    }
+
     this.notificacion.requestPermission().then(token => {
       console.log('Authorization messaging: ', token);
       if (token) {

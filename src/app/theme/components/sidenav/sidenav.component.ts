@@ -30,7 +30,7 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit() {
     this.menuItems = this.menuService.getVerticalMenuItems();
-    const tmpUser = sessionStorage.getItem(DATA_USER)
+    const tmpUser = localStorage.getItem(DATA_USER)
     if (tmpUser) {
       let dataUser = JSON.parse(tmpUser);
       this.user.name = dataUser.name;

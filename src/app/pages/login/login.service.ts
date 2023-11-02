@@ -49,11 +49,11 @@ export class LoginService {
     }
 
     isLoggedIn() {
-        return sessionStorage.getItem(TOKEN_NAME) != null;
+        return localStorage.getItem(TOKEN_NAME) != null;
     }
 
     getToken() {
-        return sessionStorage.getItem(TOKEN_NAME);
+        return localStorage.getItem(TOKEN_NAME);
     }
 
 }

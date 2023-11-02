@@ -32,19 +32,11 @@ import { ApplicationsComponent } from './theme/components/applications/applicati
 import { MessagesComponent } from './theme/components/messages/messages.component';
 import { UserMenuComponent } from './theme/components/user-menu/user-menu.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-//import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-//import { environment } from '../environments/environment';
-//import { provideAuth, getAuth } from '@angular/fire/auth';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
-//import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { environment } from '../environments/environment';
-//import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
-//import { AngularFireModule } from '@angular/fire/compat';
 import { ServerErrorsInterceptor } from './shared/server-errors.interceptor';
 import { AyudaOutSideComponent } from './pages/ayudaoutside/ayudaoutside.component';
 import { RecordarPassComponent } from './pages/recordarpass/recordarpass.component';
-import { PushNotificationService } from './shared/push-notification.service';
 
 @NgModule({
   imports: [
@@ -63,17 +55,8 @@ import { PushNotificationService } from './shared/push-notification.service';
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-
-    //provideFirebaseApp(() => initializeApp(environment.firebase)),
-    // provideAuth(() => getAuth()),
-    //AngularFireMessagingModule,
-    //AngularFireModule
-    //AngularFireModule.initializeApp(environment.firebase),
-    //AngularFireMessagingModule
 
   ],
   declarations: [

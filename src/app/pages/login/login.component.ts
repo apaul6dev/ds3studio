@@ -56,9 +56,9 @@ export class LoginComponent {
           lastname: rs.data.apellidos
         }
 
-        sessionStorage.setItem(DATA_USER, JSON.stringify(data));
-        sessionStorage.setItem(TOKEN_NAME, this.dataUser.token);
-        sessionStorage.setItem(CONFIG_NAME, JSON.stringify(this.dataConfigUser));
+        localStorage.setItem(DATA_USER, JSON.stringify(data));
+        localStorage.setItem(TOKEN_NAME, this.dataUser.token);
+        localStorage.setItem(CONFIG_NAME, JSON.stringify(this.dataConfigUser));
 
         this.tokenNotificationsService.sendTokenToServer(this.tokenMessaging).subscribe(rs => {
           console.log('Messaging token sent to save: ', rs);
