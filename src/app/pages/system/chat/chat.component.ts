@@ -22,7 +22,7 @@ export class ChatComponent implements OnInit {
   public userImage = 'assets/img/users/default-user.jpg';
   public chats: Array<Chat> = [];
   public talks: Array<Chat> = [];
-  public sidenavOpen: boolean = true;
+  public sidenavOpen: boolean = false;
   public currentChat: Chat;
   public newMessage: string;
 
@@ -50,10 +50,11 @@ export class ChatComponent implements OnInit {
       let dataUser = JSON.parse(tmpUser);
       this.user.name = dataUser.name;
       this.user.lastname = dataUser.lastname;
-      //console.log('Recuperado:', dataUser);
     }
 
     this.chats = this.chatService.getChats();
+
+    this.getChat(this.chats[0]);
 
     this.chatService.datosCambio.subscribe(
       rs => {
@@ -76,6 +77,7 @@ export class ChatComponent implements OnInit {
     if (window.innerWidth <= 768) {
       this.sidenavOpen = false;
     }
+
   }
 
 
