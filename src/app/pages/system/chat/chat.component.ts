@@ -38,15 +38,12 @@ export class ChatComponent implements OnInit {
     private chatService: ChatService,
     private chatUpdateService: ChatUpdateService,
     public snackBar: MatSnackBar,
-    private soundPlayService: SoundPlayService
   ) {
     this.settings = this.appSettings.settings;
   }
 
   ngOnInit() {
     this.chatUpdateService.datosCambio.subscribe(rs => {
-      // this.soundPlayService.soundPlayChat();
-      //console.log('Refreshing messages', rs);
       this.refrescarUltimosMensajes();
     });
 
