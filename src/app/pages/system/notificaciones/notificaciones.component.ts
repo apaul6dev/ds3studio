@@ -70,9 +70,9 @@ export class NotificacionesComponent implements OnInit {
     //this.firstload = true;
     const solicitud: any = {};
     solicitud.pagina = page;
-    this.settings.loadingSpinner = true;
+    //this.settings.loadingSpinner = true;
     this.notificacionesService.obtenerDatos(solicitud).subscribe(resp => {
-      this.settings.loadingSpinner = false;
+      //this.settings.loadingSpinner = false;
       if (resp.lista) {
         resp.lista.forEach((element: { iconoalerta: string }, index: number) => {
           // setTimeout(() => {

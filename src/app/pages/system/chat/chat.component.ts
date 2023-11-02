@@ -118,19 +118,14 @@ export class ChatComponent implements OnInit {
 
     this.chatService.getMensajes({ id: null, pagina: 1 }).subscribe(rs => {
       if (rs.estado && rs.estado == 'OK') {
-
         this.moreMessages = true;
-
         this.talks.push(obj);
         const listaTmp: ChatMessageServer[] = rs.data;
         listaTmp.forEach(ms => {
-          let tmp = new Chat(
-            'assets/img/profile/comunidad.png',
-            ms.nombres,
-            'Pendiente',
-            ms.texto, new Date(ms.fcreacion), true)
+          let tmp = this.getChatObj(ms) ;
           this.talks.unshift(tmp);
         });
+
         this.currentChat = obj;
         this.talks.forEach(talk => {
           if (!talk.my) {
@@ -140,7 +135,6 @@ export class ChatComponent implements OnInit {
       }
     });
 
-
     if (window.innerWidth <= 768) {
       this.sidenav.close();
     }
@@ -149,6 +143,7 @@ export class ChatComponent implements OnInit {
   public sendMessage($event: any) {
     if (($event.which === 1 || $event.which === 13) && this.newMessage.trim() != '') {
       if (this.talks) {
+        
         const msg = new Chat(
           'assets/img/users/default-user.jpg',
           `${this.user.name} ${this.user.lastname}`,
@@ -156,7 +151,8 @@ export class ChatComponent implements OnInit {
           this.newMessage,
           new Date(),
           true);
-        this.talks.push(msg);
+
+        //this.talks.push(msg);
         this.newMessage = '';
         this.chatService.datosCambio.next(msg);
         let chatContainer = document.querySelector('.chat-content');
@@ -181,43 +177,13 @@ export class ChatComponent implements OnInit {
 
   }
 
-  sendMsg() {
-
-    /*
-    if (!this.editorMsg.trim()) return;
-
-    // Mock message
-    let newMsg: ChatMessage = {
-      nombres: this.nombres,
-      avatar: '',
-      fcreacion: Date.now(),
-      texto: this.editorMsg.trim(),
-      estado: 'pending',
-      yo: true,
-      tracker: Math.random().toString(36).substring(2),
-    };
-
-    this.editorMsg = '';
-
-    this.pushNewMsg(newMsg);
-
-    this.authHttp.post(
-      this.urlEnviarMensaje,
-      newMsg,
-      (respuesta) => {
-        if (this.utilitarios.handleError(respuesta)) {
-          newMsg.estado = 'fail';
-          return;
-        }
-
-        if (respuesta && respuesta.data) {
-          this.pushNewMsg(respuesta.data);
-        }
-      },
-      (error) => {
-        newMsg.estado = 'fail';
-      }
-    ); */
+  getChatObj(ms:any) {
+    let tmp = new Chat(
+      'assets/img/profile/comunidad.png',
+      ms.nombres,
+      'Pendiente',
+      ms.texto, new Date(ms.fcreacion), true);
+    return tmp;
   }
 
   refrescarUltimosMensajes() {
@@ -227,7 +193,22 @@ export class ChatComponent implements OnInit {
     };
     this.chatService.refrescarUltimosMensajes(solicitud).subscribe(rs => {
       console.log('refrescarUltimosMensajes', rs);
+      if (rs.estado === 'OK') {
 
+        const mensajes = rs.data;
+        console.log('mensajes: ', mensajes);
+        
+        if (mensajes.length > 0) {
+          const lastMsg = mensajes[0];
+          console.log('last', lastMsg);
+          
+          let tmp = this.getChatObj(lastMsg);
+          //tmp.image = this.currentChat.image;
+          this.talks.push(tmp);
+        } else {
+          console.log('No hay mensajes');
+        }
+      }
     });
 
     /*
