@@ -1,1 +1,15 @@
-{}
+{
+  "hosting": [
+    {
+      "public": "./",
+      "ignore": [
+        "firebase.json"
+      ]
+    },
+    {
+      "target": "ds3seguridad",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "modosmart-2506c": {
+      "hosting": {
+        "ds3seguridad": [
+          "modosmart-2506c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "modosmart-2506c"
+  }
+}

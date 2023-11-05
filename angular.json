@@ -129,6 +129,13 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2,
+            "browserTarget": "ds3seguridad:build:production"
+          }
         }
       }
     }
