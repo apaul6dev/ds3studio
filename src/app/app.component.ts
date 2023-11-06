@@ -59,14 +59,14 @@ export class AppComponent implements OnInit {
         if (contenido.type === 'msg') {
           const notification = payload.notification.title ? payload.notification.title : 'No se ha recuperado la notificacion';
           this.chatUpdateService.datosCambio.next(contenido);
-          //this.soundPlayService.soundPlayChat();
+          this.soundPlayService.soundPlayChat();
           this.openSnackBar(notification, "OK");
         } else {
 
           const titulo = contenido.titulo;
           const mensaje = contenido.mensaje;
           this.openSnackBar(mensaje, titulo);
-          //this.soundPlayService.soundPlayModoSmart();
+          this.soundPlayService.soundPlayModoSmart();
           this.inicioService.datosCambio.next(this.mesaggeReceived);
           this.notificacionesService.datosCambio.next(this.mesaggeReceived);
           this.dispositivosService.datosCambio.next(this.mesaggeReceived);

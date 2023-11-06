@@ -1,3 +1,5 @@
 {
-    "gcm_sender_id": "32762457249"
+    "gcm_sender_id": "32762457249",
+    "//_comment1": "Some browsers will use this to enable push notifications.",
+    "display": "standalone"
 }
