@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AppSettings } from './app.settings';
 import { Settings } from './app.settings.model';
 import { PushNotificationService } from './shared/push-notification.service';
@@ -17,25 +17,37 @@ import { DispositivosService } from './pages/system/dispositivos/dispositivos.se
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
   public settings: Settings;
   public mesaggeReceived: any = '';
 
-  constructor(public appSettings: AppSettings, private swUpdate: SwUpdate,  private dispositivosService: DispositivosService,
+  constructor(public appSettings: AppSettings, private swUpdate: SwUpdate, private dispositivosService: DispositivosService,
     private soundPlayService: SoundPlayService, private chatUpdateService: ChatUpdateService,
     private inicioService: InicioService, private notificacionesService: NotificacionesService,
     private notificacion: PushNotificationService, public snackBar: MatSnackBar) {
     this.settings = this.appSettings.settings;
 
     if (this.swUpdate.isEnabled) {
+      /*
       this.swUpdate.versionUpdates.pipe(
         filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'),
         map(evt => ({
           type: 'UPDATE_AVAILABLE',
           current: evt.currentVersion,
           available: evt.latestVersion,
-        })));
+        }))); */
+
+        this.swUpdate.available.subscribe(evt => {
+          const snack = this.snackBar.open('Update Available', 'Reload Please.');
+          snack.onAction().subscribe(() => {
+            window.location.reload();
+          });
+          setTimeout(() => {
+            snack.dismiss();
+          }, 10000);
+        });
+        
     }
 
     this.notificacion.requestPermission().then(token => {
@@ -46,6 +58,10 @@ export class AppComponent implements OnInit {
         console.log("No se pudo guardar el token de las notificaciones.");
       }
     });
+  }
+
+  ngAfterViewInit() {
+   // window.location.reload();
   }
 
   ngOnInit(): void {
@@ -70,7 +86,6 @@ export class AppComponent implements OnInit {
           this.inicioService.datosCambio.next(this.mesaggeReceived);
           this.notificacionesService.datosCambio.next(this.mesaggeReceived);
           this.dispositivosService.datosCambio.next(this.mesaggeReceived);
-          
         }
 
       } else {

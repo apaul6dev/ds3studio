@@ -33,6 +33,7 @@ export class PagesComponent implements OnInit {
     this.settings = this.appSettings.settings;
   }
 
+
   ngOnInit() {
     if (window.innerWidth <= 768) {
       this.settings.menu = 'vertical';

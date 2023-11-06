@@ -20,29 +20,6 @@ const initializeFirebase = async () => {
                 return payload;
             });
 
-            /*
-            self.addEventListener('notificationclick', event => {
-                event.notification.close();
-                event.waitUntil(
-                  clients
-                    .matchAll({ type: "window" })
-                    .then(clientList => {
-                      for (const client of clientList) {
-                        if (client.url === '/' && 'focus' in client) {
-                          if (event.notification.data.route) {
-                            client.navigate(event.notification.data.route);
-                          }
-                          return client.focus();
-                        }
-                      }
-                      if (clients.openWindow) {
-                        return clients.openWindow(event.notification.data.route || '/');
-                      }
-                    })
-                );
-              }); */
-
-
         }
     } catch (error) {
         console.error('Error en la inicialización de Firebase:', error);

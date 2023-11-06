@@ -58,7 +58,8 @@
               "clone-deep",
               "quill",
               "rfdc",
-              "bezier-easing"
+              "bezier-easing",
+              "howler"
             ],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"

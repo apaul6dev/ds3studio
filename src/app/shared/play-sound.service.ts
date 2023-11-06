@@ -1,24 +1,35 @@
 import { Injectable, OnInit } from "@angular/core";
+import { Howl, Howler } from 'howler';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SoundPlayService implements OnInit {
 
-    constructor() { }
+    soundSmart = new Howl({
+        src: ['assets/modosmart.mp3']
+      });
+
+      
+      soundMessage = new Howl({
+        src: ['assets/chat.mp3']
+      });
+    
+
+    constructor() { 
+        
+    }
 
     ngOnInit(): void {
 
     }
 
     soundPlayModoSmart() {
-        const audio = new Audio('assets/modosmart.mp3');
-        audio.play();
+       this.soundSmart.play()
     }
 
     soundPlayChat() {
-        const audio = new Audio('assets/chat.mp3');
-        audio.play();
+        this.soundMessage.play()
     }
 
 }
