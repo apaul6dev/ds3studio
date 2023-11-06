@@ -18,8 +18,8 @@ export class RecordarPassComponent implements OnInit {
     public router: Router, private recordarPassService: RecordarPassService) {
 
     this.form = this.fb.group({
-      'email': ['f@gmail.com',  Validators.required],
-      'confirmEmail': ['f@gmail.com',  Validators.required]
+      'email': ['', Validators.required],
+      'confirmEmail': ['', Validators.required]
     }, { validator: matchingEmail('email', 'confirmEmail') });
   }
 
@@ -29,7 +29,7 @@ export class RecordarPassComponent implements OnInit {
 
   public onSubmit(values: any): void {
     console.log(values, this.form.valid);
-    
+
     if (this.form.valid) {
 
       let req = {
@@ -38,7 +38,7 @@ export class RecordarPassComponent implements OnInit {
 
       this.recordarPassService.recordarPass(req).subscribe(datos => {
         console.log('recordando', datos);
-        
+
         if (!datos || datos.estado != 'OK') {
           this.openSnackBar(
             datos.mensaje || 'Ocurrio un error, verifique su conexión', datos.titulo || 'Error'
