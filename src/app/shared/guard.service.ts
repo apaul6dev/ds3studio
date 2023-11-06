@@ -16,7 +16,7 @@ export class GuardService {
             return true;
         } else {
             localStorage.clear();
-            this.router.navigate(['/dsecurity/login']);
+            this.router.navigate(['/login']);
             return false;
         }
     }

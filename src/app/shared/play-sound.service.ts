@@ -1,35 +1,48 @@
-import { Injectable, OnInit } from "@angular/core";
-import { Howl, Howler } from 'howler';
+import { Injectable } from "@angular/core";
+import { Howl } from 'howler';
 
 @Injectable({
     providedIn: 'root'
 })
-export class SoundPlayService implements OnInit {
+export class SoundPlayService {
 
-    soundSmart = new Howl({
-        src: ['assets/modosmart.mp3']
-      });
+    audioContext: AudioContext;
+    private soundSmart: Howl;
+    private soundMessage: Howl;
 
-      
-      soundMessage = new Howl({
-        src: ['assets/chat.mp3']
-      });
-    
+    constructor() {
+        this.audioContext = new AudioContext();
 
-    constructor() { 
-        
-    }
+        this.soundSmart = new Howl({
+            src: ['assets/modosmart.mp3'],
+            onplayerror: () => {
+                console.error('Error al reproducir el sonido de ModoSmart');
+            }
+        });
 
-    ngOnInit(): void {
-
+        this.soundMessage = new Howl({
+            src: ['assets/chat.mp3'],
+            onplayerror: () => {
+                console.error('Error al reproducir el sonido de chat');
+            }
+        });
     }
 
     soundPlayModoSmart() {
-       this.soundSmart.play()
+        this.audioContext.resume().then(() => {
+            this.soundSmart.play();
+        })
+            .catch(error => {
+                console.error('Error al iniciar el contexto de audio: ' + error.message);
+            });
     }
 
     soundPlayChat() {
-        this.soundMessage.play()
+        this.audioContext.resume().then(() => {
+            this.soundMessage.play();
+        })
+            .catch(error => {
+                console.error('Error al iniciar el contexto de audio: ' + error.message);
+            });
     }
-
 }
