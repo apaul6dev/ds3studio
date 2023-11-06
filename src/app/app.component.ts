@@ -8,8 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificacionesService } from './pages/system/notificaciones/notificaciones.service';
 import { ChatUpdateService } from './pages/system/chat/chat-update.service';
 import { SoundPlayService } from './shared/play-sound.service';
-import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
-import { filter, map } from 'rxjs/operators';
+import { SwUpdate } from '@angular/service-worker';
 import { DispositivosService } from './pages/system/dispositivos/dispositivos.service';
 
 @Component({

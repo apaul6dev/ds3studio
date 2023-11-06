@@ -1,6 +1,14 @@
 importScripts('https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/10.5.0/firebase-messaging-compat.js');
 
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./firebase-messaging-sw.js').then(function (reg) {
+        console.log('reg: ', reg.scope);
+    }).catch(function (err) {
+        console.log('err: ', err);
+    })
+}
+
 const initializeFirebase = async () => {
     try {
         await firebase.initializeApp({

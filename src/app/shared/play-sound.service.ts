@@ -6,15 +6,15 @@ import { Howl } from 'howler';
 })
 export class SoundPlayService {
 
-    audioContext: AudioContext;
     private soundSmart: Howl;
     private soundMessage: Howl;
 
     constructor() {
-        this.audioContext = new AudioContext();
 
         this.soundSmart = new Howl({
             src: ['assets/modosmart.mp3'],
+            //html5: true,
+            //autoplay: true,
             onplayerror: () => {
                 console.error('Error al reproducir el sonido de ModoSmart');
             }
@@ -22,6 +22,8 @@ export class SoundPlayService {
 
         this.soundMessage = new Howl({
             src: ['assets/chat.mp3'],
+            //html5: true,
+            //autoplay: true,
             onplayerror: () => {
                 console.error('Error al reproducir el sonido de chat');
             }
@@ -29,20 +31,11 @@ export class SoundPlayService {
     }
 
     soundPlayModoSmart() {
-        this.audioContext.resume().then(() => {
-            this.soundSmart.play();
-        })
-            .catch(error => {
-                console.error('Error al iniciar el contexto de audio: ' + error.message);
-            });
+        this.soundSmart.play();
     }
 
     soundPlayChat() {
-        this.audioContext.resume().then(() => {
-            this.soundMessage.play();
-        })
-            .catch(error => {
-                console.error('Error al iniciar el contexto de audio: ' + error.message);
-            });
+        this.soundMessage.play();
     }
+
 }
