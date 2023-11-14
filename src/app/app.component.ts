@@ -21,13 +21,26 @@ export class AppComponent implements OnInit, AfterViewInit {
   public settings: Settings;
   public mesaggeReceived: any = '';
 
-  constructor(public appSettings: AppSettings, private swUpdate: SwUpdate, private dispositivosService: DispositivosService,
-    private soundPlayService: SoundPlayService, private chatUpdateService: ChatUpdateService,
-    private inicioService: InicioService, private notificacionesService: NotificacionesService,
-    private notificacion: PushNotificationService, public snackBar: MatSnackBar) {
+  constructor(
+    public appSettings: AppSettings,
+    private swUpdate: SwUpdate,
+    private dispositivosService: DispositivosService,
+    //private soundPlayService: SoundPlayService, 
+    private chatUpdateService: ChatUpdateService,
+    private inicioService: InicioService,
+    private notificacionesService: NotificacionesService,
+    private notificacion: PushNotificationService,
+    public snackBar: MatSnackBar) {
     this.settings = this.appSettings.settings;
 
+    navigator.serviceWorker.addEventListener('message', (event) => {
+      if (event.data && event.data.type === 'refreshPage') {
+        location.reload();
+      }
+    });
+
     if (this.swUpdate.isEnabled) {
+
       /*
       this.swUpdate.versionUpdates.pipe(
         filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'),
@@ -37,16 +50,16 @@ export class AppComponent implements OnInit, AfterViewInit {
           available: evt.latestVersion,
         }))); */
 
-        this.swUpdate.available.subscribe(evt => {
-          const snack = this.snackBar.open('Update Available', 'Reload Please.');
-          snack.onAction().subscribe(() => {
-            window.location.reload();
-          });
-          setTimeout(() => {
-            snack.dismiss();
-          }, 10000);
+      this.swUpdate.available.subscribe(evt => {
+        const snack = this.snackBar.open('Update Available', 'Reload Please.');
+        snack.onAction().subscribe(() => {
+          window.location.reload();
         });
-        
+        setTimeout(() => {
+          snack.dismiss();
+        }, 10000);
+      });
+
     }
 
     this.notificacion.requestPermission().then(token => {
@@ -60,7 +73,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-   // window.location.reload();
   }
 
   ngOnInit(): void {
@@ -74,14 +86,14 @@ export class AppComponent implements OnInit, AfterViewInit {
         if (contenido.type === 'msg') {
           const notification = payload.notification.title ? payload.notification.title : 'No se ha recuperado la notificacion';
           this.chatUpdateService.datosCambio.next(contenido);
-          this.soundPlayService.soundPlayChat();
+          //this.soundPlayService.soundPlayChat();
           this.openSnackBar(notification, "OK");
         } else {
 
           const titulo = contenido.titulo;
           const mensaje = contenido.mensaje;
           this.openSnackBar(mensaje, titulo);
-          this.soundPlayService.soundPlayModoSmart();
+          //this.soundPlayService.soundPlayModoSmart();
           this.inicioService.datosCambio.next(this.mesaggeReceived);
           this.notificacionesService.datosCambio.next(this.mesaggeReceived);
           this.dispositivosService.datosCambio.next(this.mesaggeReceived);

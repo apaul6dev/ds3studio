@@ -44,6 +44,7 @@ export class SidenavComponent implements OnInit {
     this.loginService.logout().subscribe(rs => {
       console.log("logout system: ", rs);
       sessionStorage.clear();
+      localStorage.clear();
     });
   }
 
