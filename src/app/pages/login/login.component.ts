@@ -25,10 +25,10 @@ export class LoginComponent {
     private loginService: LoginService, private tokenNotificationsService: TokenNotificationsService) {
     this.settings = this.appSettings.settings;
     this.form = this.fb.group({
-      'email': ["usrtest2@d3studio.tk", Validators.required],
-      'password': ["paul2023", Validators.compose([Validators.required, Validators.minLength(6)])]
-      //'email': ["", Validators.required],
-      //'password': ["", Validators.compose([Validators.required, Validators.minLength(6)])]
+      //'email': ["usrtest2@d3studio.tk", Validators.required],
+      //'password': ["paul2023", Validators.compose([Validators.required, Validators.minLength(6)])]
+      'email': ["", Validators.required],
+      'password': ["", Validators.compose([Validators.required, Validators.minLength(6)])]
     });
 
     this.tokenMessaging = localStorage.getItem(TOKEN_MESSAGING);
